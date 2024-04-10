@@ -6,7 +6,7 @@
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           class="profile-img-card"
       />
-      <Form @submit="handleLogin" :validation-schema="schema">
+      <Form>
         <div class="container text-start">
           <div class="row justify-content-center">
             <div class="col">
@@ -26,20 +26,127 @@
         <div class="form-group">
           <button @click="executeLogIn" type="submit" class="btn btn-primary text-center text-nowrap">Log in</button>
         </div>
-
-        <div class="form-group">
-          <div v-if="message" class="alert alert-danger" role="alert">
-            {{ message }}
-          </div>
-        </div>
       </Form>
     </div>
   </div>
 </template>
 
 <script>
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+import router from "@/router";
 export default {
-  name: "LoginView"
+  name: "LoginView",
+  components: {AlertDanger},
+  data() {
+    return {
+      username: '',
+      password: '',
+      message: '',
+      loginResponse: {
+        userId: 0,
+        roleName: ''
+      },
+      errorResponse: {
+        message: '',
+        errorCode: 0
+      }
+
+    }
+  },
+  methods: {
+
+    executeLogIn() {
+      if (this.allFieldsWithCorrectInput()) {
+        this.sendLoginRequest()
+      } else {
+        this.displayAllFieldsRequiredAlert();
+      }
+    },
+
+    allFieldsWithCorrectInput() {
+      return this.username.length > 0 && this.password.length > 0;
+    },
+
+    sendLoginRequest() {
+
+      //todo: lisada kodeerimine (kasutaja ja salasona)
+      this.$http.get('/login', {
+            params: {
+              username: this.username,
+              password: this.password
+            }
+          }
+      ).then(response => {
+        this.loginResponse = response.data
+        this.handleLoginRequestResponse()
+      }).catch(error => {
+        this.errorResponse = error.response.data
+        this.handleError(error.response.status)
+      })
+    },
+
+    handleLoginRequestResponse() {
+      this.saveLoginResponseInfoToSessionStorage();
+      this.$emit('event-update-nav-menu')
+      this.resetAllInputFields()
+
+      if (this.loginResponse.roleName === 'Admin') {
+        router.push({name: 'usersRoute'})
+      } else if (this.loginResponse.roleName === 'Scout') {
+        router.push({name: 'playersRoute'})
+      } else if (this.loginResponse.roleName === 'Coach') {
+        router.push({name: 'teamRoute'})
+      } else {
+        router.push({name: 'homeRoute'})
+      }
+    },
+
+    saveLoginResponseInfoToSessionStorage() {
+      sessionStorage.setItem('userId', this.loginResponse.userId)
+      sessionStorage.setItem('roleName', this.loginResponse.roleName)
+    },
+
+    resetAllInputFields() {
+      this.username = ''
+      this.password = ''
+    },
+
+    displayAllFieldsRequiredAlert() {
+      this.message = "Täida kõik väljad";
+      setTimeout(this.resetMessage, 4000);
+    },
+
+    handleError(statusCode) {
+      this.handleIncorrectCredentialsError(statusCode);
+      this.handleSomethingWentWrongError();
+    },
+
+    handleIncorrectCredentialsError(statusCode) {
+      if (this.incorrectCredentials(statusCode)) {
+        this.displayIncorrectCredentialsAlert()
+      }
+    },
+
+    handleSomethingWentWrongError() {
+      if (111 !== this.errorResponse.errorCode) {
+        router.push({name: 'errorRoute'})
+      }
+    },
+
+    incorrectCredentials(statusCode) {
+      return statusCode === 403 && this.errorResponse.errorCode === 111;
+    },
+
+    displayIncorrectCredentialsAlert() {
+      this.message = this.errorResponse.message;
+      setTimeout(this.resetMessage, 4000);
+    },
+
+    resetMessage() {
+      this.message = ''
+    },
+
+  }
 }
 </script>
 
@@ -77,7 +184,4 @@ label {
   border-radius: 50%;
 }
 
-.error-feedback {
-  color: red;
-}
 </style>
