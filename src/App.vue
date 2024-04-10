@@ -1,4 +1,5 @@
 <template>
+  <LogOutModal ref="logOutModalRef" @event-update-nav-menu="updateNavMenu"/>
   <nav>
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
@@ -8,6 +9,8 @@
   <router-view/>
 </template>
 <script>
+import LogOutModal from "@/components/modal/LogOutModal.vue";
+
 export default {
   name: 'App',
   components: {LogOutModal},
@@ -17,6 +20,33 @@ export default {
       isAdmin: false
     }
   },
+  methods: {
+
+    updateNavMenu() {
+      this.updateIsLoggedInValue()
+      this.updateIsAdminValue()
+    },
+
+    updateIsLoggedInValue() {
+      let userId = sessionStorage.getItem('userId')
+      this.isLoggedIn = userId !== null
+    },
+
+    updateIsAdminValue() {
+      if (this.isLoggedIn) {
+        let roleName = sessionStorage.getItem('roleName');
+        this.isAdmin = roleName === 'admin'
+      }
+    },
+
+    openLogOutModal() {
+      this.$refs.logOutModalRef.$refs.modalRef.openModal()
+    },
+
+  },
+  mounted() {
+    this.updateNavMenu()
+  }
 };
 </script>
 <style>
