@@ -90,14 +90,19 @@ export default {
       this.$emit('event-update-nav-menu')
       this.resetAllInputFields()
 
-      if (this.loginResponse.roleName === 'Admin') {
-        router.push({name: 'usersRoute'})
-      } else if (this.loginResponse.roleName === 'Scout') {
-        router.push({name: 'playersRoute'})
-      } else if (this.loginResponse.roleName === 'Coach') {
-        router.push({name: 'teamRoute'})
-      } else {
-        router.push({name: 'homeRoute'})
+      switch (this.loginResponse.roleName) {
+        case 'Admin':
+          router.push({name: 'usersRoute'})
+          break;
+        case 'Scout':
+          router.push({name: 'playersRoute'})
+          break;
+        case 'Coach':
+          router.push({name: 'teamRoute'})
+          break;
+        default:
+          router.push({name: 'homeRoute'})
+          break;
       }
     },
 

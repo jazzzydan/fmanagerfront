@@ -10,6 +10,13 @@
 <script>
 export default {
   name: 'App',
+  components: {LogOutModal},
+  data() {
+    return {
+      isLoggedIn: false,
+      isAdmin: false
+    }
+  },
 };
 </script>
 <style>
