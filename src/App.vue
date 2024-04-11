@@ -1,12 +1,23 @@
 <template>
   <LogOutModal ref="logOutModalRef" @event-update-nav-menu="updateNavMenu"/>
   <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/contacts">Contacts</router-link> |
-    <router-link to="/login">Log in</router-link> |
+
+    <template v-if="isLoggedIn">
+      <template v-if="isAdmin" >
+        <router-link to="/users">Users</router-link> |
+        <router-link to="/players">Clubs</router-link> |
+        <router-link to="/clubs">Players</router-link> |
+      </template>
+      <a href="#" @click="openLogOutModal">Log out</a>
+    </template>
+    <template v-else>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> |
+      <router-link to="/contact">Contacts</router-link> |
+      <router-link to="/login">Log in</router-link>
+    </template>
   </nav>
-  <router-view/>
+  <router-view @event-update-nav-menu="updateNavMenu"/>
 </template>
 <script>
 import LogOutModal from "@/components/modal/LogOutModal.vue";
@@ -35,7 +46,7 @@ export default {
     updateIsAdminValue() {
       if (this.isLoggedIn) {
         let roleName = sessionStorage.getItem('roleName');
-        this.isAdmin = roleName === 'admin'
+        this.isAdmin = roleName === 'Admin'
       }
     },
 

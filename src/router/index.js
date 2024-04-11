@@ -9,6 +9,7 @@ import ErrorView from "@/views/ErrorView.vue";
 import UsersView from "@/views/UsersView.vue";
 import PlayersView from "@/views/PlayersView.vue";
 import TeamView from "@/views/TeamView.vue";
+import ClubsView from "@/views/ClubsView.vue";
 
 
 const routes = [
@@ -41,6 +42,11 @@ const routes = [
         path: '/users',
         name: 'usersRoute',
         component: UsersView
+    },
+    {
+        path: '/clubs',
+        name: 'clubsRoute',
+        component: ClubsView
     },
     {
         path: '/players',

@@ -6,7 +6,6 @@
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           class="profile-img-card"
       />
-      <Form>
         <div class="container text-start">
           <div class="row justify-content-center">
             <div class="col">
@@ -26,7 +25,6 @@
         <div class="form-group">
           <button @click="executeLogIn" type="submit" class="btn btn-primary text-center text-nowrap">Log in</button>
         </div>
-      </Form>
     </div>
   </div>
 </template>
@@ -67,7 +65,9 @@ export default {
       return this.username.length > 0 && this.password.length > 0;
     },
 
+
     sendLoginRequest() {
+      alert("SEND")
 
       //todo: lisada kodeerimine (kasutaja ja salasona)
       this.$http.get('/login', {
@@ -77,9 +77,13 @@ export default {
             }
           }
       ).then(response => {
+        alert("OK")
+
         this.loginResponse = response.data
         this.handleLoginRequestResponse()
       }).catch(error => {
+        alert("NOK")
+
         this.errorResponse = error.response.data
         this.handleError(error.response.status)
       })

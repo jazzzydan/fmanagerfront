@@ -1,10 +1,10 @@
 <template>
   <Modal ref="modalRef">
     <template #title>
-      Logi välja?
+      Please confirm logout
     </template>
     <template #buttons>
-      <button @click="executeLogOut" type="button" class="btn btn-danger">Jah</button>
+      <button @click="executeLogOut" type="button" class="btn btn-danger">Confirm</button>
     </template>
   </Modal>
 </template>

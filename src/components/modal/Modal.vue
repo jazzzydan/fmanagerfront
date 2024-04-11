@@ -1,7 +1,7 @@
 <template>
   <!-- Modal -->
   <div v-if="isOpen" class="modal-backdrop fade show d-block"/>
-  <FocusTrap v-if="isOpen" class="modal fade show" tabindex="-1" style="display: block;">
+  <FocusTrap v-if="isOpen" class="modal fade show" tabindex="-1" style="display: block; width: 30vw">
     <div class="modal-dialog" ref="Modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -12,13 +12,13 @@
           </h1>
           <button type="button" class="btn-close" @click="closeModal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <slot name="body">
-            <!-- body-->
-          </slot>
-        </div>
+<!--        <div class="modal-body">-->
+<!--          <slot name="body">-->
+<!--            &lt;!&ndash; body&ndash;&gt;-->
+<!--          </slot>-->
+<!--        </div>-->
         <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-dark" @click="closeModal">Sulge</button>
+          <button type="button" class="btn btn-primary" @click="closeModal">Cancel</button>
           <slot name="buttons">
             <!-- button -->
           </slot>
