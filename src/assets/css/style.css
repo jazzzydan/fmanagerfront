@@ -2,8 +2,7 @@
     cursor: pointer;
 }
 
-
-
+    /*todo:  Log Out modal'i kujundus korda teha*/
 
 /* Kui modaal on nähtav, rakenda järgmised stiilid */
 .modal.fade.show.d-block {

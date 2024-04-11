@@ -67,7 +67,6 @@ export default {
 
 
     sendLoginRequest() {
-      alert("SEND")
 
       //todo: lisada kodeerimine (kasutaja ja salasona)
       this.$http.get('/login', {
@@ -77,13 +76,9 @@ export default {
             }
           }
       ).then(response => {
-        alert("OK")
-
         this.loginResponse = response.data
         this.handleLoginRequestResponse()
       }).catch(error => {
-        alert("NOK")
-
         this.errorResponse = error.response.data
         this.handleError(error.response.status)
       })

@@ -1,13 +1,21 @@
 <template>
   <LogOutModal ref="logOutModalRef" @event-update-nav-menu="updateNavMenu"/>
+
   <nav>
 
     <template v-if="isLoggedIn">
       <template v-if="isAdmin" >
         <router-link to="/users">Users</router-link> |
-        <router-link to="/players">Clubs</router-link> |
-        <router-link to="/clubs">Players</router-link> |
+        <router-link to="/clubs">Clubs</router-link> |
+        <router-link to="/players">Players</router-link> |
       </template>
+
+      <template v-else-if="isScout" >
+        <router-link to="/players">Players</router-link> |
+        <router-link to="/observations">Observations</router-link> |
+        <router-link to="/games">Games</router-link> |
+      </template>
+
       <a href="#" @click="openLogOutModal">Log out</a>
     </template>
     <template v-else>
@@ -17,6 +25,7 @@
       <router-link to="/login">Log in</router-link>
     </template>
   </nav>
+
   <router-view @event-update-nav-menu="updateNavMenu"/>
 </template>
 <script>
@@ -28,14 +37,15 @@ export default {
   data() {
     return {
       isLoggedIn: false,
-      isAdmin: false
+      isAdmin: false,
+      isScout: false
     }
   },
   methods: {
 
     updateNavMenu() {
       this.updateIsLoggedInValue()
-      this.updateIsAdminValue()
+      this.updateRoleNameValue()
     },
 
     updateIsLoggedInValue() {
@@ -43,10 +53,11 @@ export default {
       this.isLoggedIn = userId !== null
     },
 
-    updateIsAdminValue() {
+    updateRoleNameValue() {
       if (this.isLoggedIn) {
         let roleName = sessionStorage.getItem('roleName');
         this.isAdmin = roleName === 'Admin'
+        this.isScout = roleName === 'Scout'
       }
     },
 
@@ -58,7 +69,7 @@ export default {
   mounted() {
     this.updateNavMenu()
   }
-};
+}
 </script>
 <style>
 #app {

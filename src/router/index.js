@@ -10,6 +10,8 @@ import UsersView from "@/views/UsersView.vue";
 import PlayersView from "@/views/PlayersView.vue";
 import TeamView from "@/views/TeamView.vue";
 import ClubsView from "@/views/ClubsView.vue";
+import ObservationsView from "@/views/ObservationsView.vue";
+import GamesView from "@/views/GamesView.vue";
 
 
 const routes = [
@@ -52,6 +54,16 @@ const routes = [
         path: '/players',
         name: 'playersRoute',
         component: PlayersView
+    },
+    {
+        path: '/observations',
+        name: 'observationsRoute',
+        component: ObservationsView
+    },
+    {
+        path: '/games',
+        name: 'gamesRoute',
+        component: GamesView
     },
     {
         path: '/team',

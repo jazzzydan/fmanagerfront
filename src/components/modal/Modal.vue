@@ -1,7 +1,7 @@
 <template>
   <!-- Modal -->
   <div v-if="isOpen" class="modal-backdrop fade show d-block"/>
-  <FocusTrap v-if="isOpen" class="modal fade show" tabindex="-1" style="display: block; width: 30vw">
+  <FocusTrap v-if="isOpen" class="modal fade show" tabindex="-1" style="display: block;">
     <div class="modal-dialog" ref="Modal">
       <div class="modal-content">
         <div class="modal-header">
@@ -48,7 +48,7 @@ export default {
     closeModal() {
       this.$emit('event-close-modal')
       this.isOpen = false
-    }
+    },
 
   }
 }
