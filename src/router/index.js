@@ -1,17 +1,17 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/guest/HomeView.vue'
 
-import ContactView from "@/views/ContactView.vue";
+import ContactView from "@/views/guest/ContactView.vue";
 
-import AboutView from "@/views/AboutView.vue";
-import LoginView from "@/views/LoginView.vue";
+import AboutView from "@/views/guest/AboutView.vue";
+import LoginView from "@/views/guest/LoginView.vue";
 import ErrorView from "@/views/ErrorView.vue";
-import UsersView from "@/views/UsersView.vue";
+import UsersView from "@/views/admin/UsersView.vue";
 import PlayersView from "@/views/PlayersView.vue";
-import TeamView from "@/views/TeamView.vue";
-import ClubsView from "@/views/ClubsView.vue";
-import ObservationsView from "@/views/ObservationsView.vue";
-import GamesView from "@/views/GamesView.vue";
+import TeamView from "@/views/coach/TeamView.vue";
+import ClubsView from "@/views/admin/ClubsView.vue";
+import ObservationsView from "@/views/scout/ObservationsView.vue";
+import GamesView from "@/views/scout/GamesView.vue";
 
 
 const routes = [

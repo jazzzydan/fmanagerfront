@@ -56,8 +56,8 @@ export default {
     updateRoleNameValue() {
       if (this.isLoggedIn) {
         let roleName = sessionStorage.getItem('roleName');
-        this.isAdmin = roleName === 'Admin'
-        this.isScout = roleName === 'Scout'
+        this.isAdmin = roleName === 'admin'
+        this.isScout = roleName === 'scout'
       }
     },
 
