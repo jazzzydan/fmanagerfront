@@ -1,6 +1,6 @@
 <template>
   <Modal ref="modalRef">
-    <template #title>
+    <template #body>
       Please confirm logout
     </template>
     <template #buttons>

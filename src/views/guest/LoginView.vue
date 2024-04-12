@@ -116,7 +116,7 @@ export default {
     },
 
     displayAllFieldsRequiredAlert() {
-      this.message = "Täida kõik väljad";
+      this.message = "Fill in all fields";
       setTimeout(this.resetMessage, 4000);
     },
 

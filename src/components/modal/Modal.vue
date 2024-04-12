@@ -12,11 +12,11 @@
           </h1>
           <button type="button" class="btn-close" @click="closeModal" aria-label="Close"></button>
         </div>
-<!--        <div class="modal-body">-->
-<!--          <slot name="body">-->
-<!--            &lt;!&ndash; body&ndash;&gt;-->
-<!--          </slot>-->
-<!--        </div>-->
+        <div class="modal-body">
+          <slot name="body">
+            <!-- body-->
+          </slot>
+        </div>
         <div class="modal-footer justify-content-center">
           <button type="button" class="btn btn-primary" @click="closeModal">Cancel</button>
           <slot name="buttons">
