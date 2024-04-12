@@ -1,46 +1,45 @@
 
 <template>
-  <h1>This is an USERS page</h1>
-  <div>
-    <table v-if="atmLocations.length > 0" class="table table-dark table-hover">
-      <thead>
-      <tr>
-        <th scope="col">Role</th>
-        <th scope="col">Username</th>
-        <th scope="col">e-mail</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="atm in atmLocations" :key="atm.locationId">
-        <td>{{ atm.cityName }}</td>
-        <td>
-          <a href="#" @click="openViewLocationInfoModal(atm.locationId)">{{ atm.locationName }}</a>
+  <div class="container text-center">
+    <div class="row justify-content-center">
+      <div class="col col-8">
+        <AlertDanger :message="errorMessage"/>
+        <AlertSuccess :message="successMessage"/>
+        <div class="d-grid gap-2">
+          <button class="btn btn-success" type="button">Add new user</button>
+          <br>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col col-8">
 
-        </td>
-        <td>
-          <p v-for="transactionType in atm.transactionTypes" :key="transactionType.transactionTypeName">
-            {{ transactionType.transactionTypeName }}
-          </p>
-        </td>
-        <td v-if="isAdmin">
-          <font-awesome-icon @click="navigateToEditLocation(atm.locationId)" class="link-warning cursor-pointer"
-                             :icon="['far', 'pen-to-square']"/>
-        </td>
-        <td v-if="isAdmin">
-          <font-awesome-icon @click="openDeleteLocationInfoModal(atm.locationId)" class="link-warning cursor-pointer"
-                             :icon="['far', 'trash-can']"/>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+        <UsersTable/>
 
+      </div>
+    </div>
   </div>
+
 </template>
 
 <script>
+
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+import AlertSuccess from "@/components/alert/AlertSuccess.vue";
+import UsersTable from "@/components/table/UsersTable.vue";
+
 export default {
-  name: "UsersView"
+  name: "UsersView",
+  components: {UsersTable, AlertSuccess, AlertDanger},
+  data() {
+    return {
+      roleName: sessionStorage.getItem('roleName'),
+      errorMessage: '',
+      successMessage: ''
+    }
+  },
+  methods: {
+
+  }
 }
 </script>
