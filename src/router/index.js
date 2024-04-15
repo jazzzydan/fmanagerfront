@@ -68,6 +68,7 @@ const routes = [
         name: 'teamRoute',
         component: TeamView
     },
+
 ]
 
 const router = createRouter({

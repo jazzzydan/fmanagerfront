@@ -13,6 +13,7 @@
       </div>
       <div class="col">
         Club dropdown
+        <ClubDropdown/>
       </div>
       <div class="col">
         Search field
@@ -38,9 +39,10 @@
 
 import PlayersTable from "@/components/table/PlayersTable.vue";
 import ConfederationDropdown from "@/components/dropdown/ConfederationDropdown.vue";
+import ClubDropdown from "@/components/dropdown/ClubDropdown.vue";
 
 export default {
   name: "PlayersView",
-  components: {ConfederationDropdown, PlayersTable}
+  components: {ClubDropdown, ConfederationDropdown, PlayersTable}
 }
 </script>
