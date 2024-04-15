@@ -4,7 +4,7 @@
       Please confirm logout
     </template>
     <template #buttons>
-      <button @click="executeLogOut" type="button" class="btn btn-danger">Confirm</button>
+      <button @click="executeLogOut" type="button" class="btn btn-success">Confirm</button>
     </template>
   </Modal>
 </template>

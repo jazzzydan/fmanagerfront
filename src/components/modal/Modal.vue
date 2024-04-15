@@ -18,10 +18,11 @@
           </slot>
         </div>
         <div class="modal-footer justify-content-center">
-          <button type="button" class="btn btn-primary" @click="closeModal">Cancel</button>
+
           <slot name="buttons">
             <!-- button -->
           </slot>
+          <button type="button" class="btn btn-danger" @click="closeModal">Cancel</button>
         </div>
       </div>
     </div>
