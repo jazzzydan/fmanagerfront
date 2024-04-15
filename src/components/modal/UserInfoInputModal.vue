@@ -5,7 +5,7 @@
       Add new user
     </template>
     <template #body>
-      <div class="container text-center">
+      <div class="container text-end">
         <div class="row">
           <div class="col">
             <UserRoleDropdown/>
