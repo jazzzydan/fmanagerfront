@@ -6,6 +6,7 @@
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
           class="profile-img-card"
       />
+<!--      <form>-->
         <div class="container text-start">
           <div class="row justify-content-center">
             <div class="col">
@@ -21,10 +22,10 @@
             </div>
           </div>
         </div>
-
-        <div class="form-group">
-          <button @click="executeLogIn" type="submit" class="btn btn-primary text-center text-nowrap">Log in</button>
-        </div>
+<!--      </form>-->
+      <div class="form-group">
+        <button @click="executeLogIn" type="submit" class="btn btn-primary text-center text-nowrap">Log in</button>
+      </div>
     </div>
   </div>
 </template>
@@ -32,6 +33,7 @@
 <script>
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import router from "@/router";
+
 export default {
   name: "LoginView",
   components: {AlertDanger},

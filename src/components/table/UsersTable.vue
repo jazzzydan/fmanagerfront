@@ -1,7 +1,7 @@
 
 <template>
   <div>
-  <table class="table table-dark table-hover rounded-table">
+  <table class="table table-success table-hover rounded-table">
     <thead>
     <tr>
       <th scope="col">Role</th>
@@ -17,14 +17,13 @@
       <td>{{ user.username }}</td>
       <td>{{ user.email }}</td>
       <td>
-        <font-awesome-icon @click="" class="link-warning cursor-pointer"
+        <font-awesome-icon @click="" class="link-success cursor-pointer"
                            :icon="['far', 'pen-to-square']"/>
       </td>
       <td>
-        <font-awesome-icon @click="" class="link-warning cursor-pointer"
+        <font-awesome-icon @click="" class="link-danger cursor-pointer"
                            :icon="['far', 'trash-can']"/>
       </td>
-<!--      todo: kursori näpuks muutmine korda teha-->
     </tr>
     </tbody>
   </table>
@@ -40,17 +39,17 @@ export default {
       selectedUserId: 0,
       users: [
         {
-          "userId": 0,
-          "roleName": "string",
-          "username": "string",
-          "email": "string"
+          userId: 0,
+          roleName: '',
+          username: '',
+          email: ''
         }
       ],
       user: {
-      "userId": 0,
-        "roleName": "string",
-        "username": "string",
-        "email": "string"
+      userId: 0,
+        roleName: '',
+        username: '',
+        email: ''
       }
     }
   },

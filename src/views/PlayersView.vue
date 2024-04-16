@@ -3,10 +3,10 @@
   <div class="container text-center">
     <div class="row">
       <div class="col">
-        <ConfederationDropdown/>
+        <ConfederationDropdown ref="confederationDropdownRef" @event-selected-confederation-change="setConfederationId"/>
       </div>
       <div class="col">
-        Country dropdown
+        <CountryDropdown ref="countryDropdownRef"/>
       </div>
       <div class="col">
         League dropdown
@@ -38,9 +38,25 @@
 
 import PlayersTable from "@/components/table/PlayersTable.vue";
 import ConfederationDropdown from "@/components/dropdown/ConfederationDropdown.vue";
+import CountryDropdown from "@/components/dropdown/CountryDropdown.vue";
 
 export default {
   name: "PlayersView",
-  components: {ConfederationDropdown, PlayersTable}
+  components: {CountryDropdown, ConfederationDropdown, PlayersTable},
+
+  data() {
+    return {
+      errorMessage: '',
+      successMessage: '',
+
+      confederationId: 0
+    }
+  },
+  methods: {
+    setConfederationId(selectedConfederationId) {
+      this.confederationId = selectedConfederationId
+      this.$refs.countryDropdownRef.getSelectedConfederationId(selectedConfederationId)
+    },
+  }
 }
 </script>
