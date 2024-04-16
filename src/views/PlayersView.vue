@@ -30,7 +30,6 @@
     </div>
     <div class="row">
 <!--      todo: Add Players table functionality-->
-      <PlayersTable/>
     </div>
   </div>
 </template>
@@ -46,20 +45,10 @@ export default {
   components: {ClubDropdown, ConfederationDropdown},
   data() {
     return {
-      userId: sessionStorage.getItem('userId'),
-      roleName: sessionStorage.getItem('roleName'),
       errorMessage:'',
       successMessage:''
     }
-  },
-  methods:{
-    updateClubDropdown(selectedClubId) {
-      this.$refs.playersTableRef.selectedClubId = selectedClubId
-      this.$refs.playersTableRef.sendGetClubsRequest()
-    },
-  },
-  beforeMount() {
-    this.updateClubDropdown()
   }
 }
+
 </script>
