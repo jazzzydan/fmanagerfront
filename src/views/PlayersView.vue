@@ -43,6 +43,23 @@ import ClubDropdown from "@/components/dropdown/ClubDropdown.vue";
 
 export default {
   name: "PlayersView",
-  components: {ClubDropdown, ConfederationDropdown, PlayersTable}
+  components: {ClubDropdown, ConfederationDropdown},
+  data() {
+    return {
+      userId: sessionStorage.getItem('userId'),
+      roleName: sessionStorage.getItem('roleName'),
+      errorMessage:'',
+      successMessage:''
+    }
+  },
+  methods:{
+    updateClubDropdown(selectedClubId) {
+      this.$refs.playersTableRef.selectedClubId = selectedClubId
+      this.$refs.playersTableRef.sendGetClubsRequest()
+    },
+  },
+  beforeMount() {
+    this.updateClubDropdown()
+  }
 }
 </script>

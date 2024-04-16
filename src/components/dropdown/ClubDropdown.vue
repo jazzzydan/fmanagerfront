@@ -16,10 +16,12 @@ export default {
   name: "ClubDropdown",
   data() {
     return {
+      selectedLeagueId: 0,
       selectedClubId: 0,
       clubs: [
         {
           clubId: 0,
+          leagueId: 0,
           clubName: ''
         }
       ]
