@@ -1,10 +1,12 @@
 <template>
   <select v-model="selectedCountryId"
           @change="emitSelectedCountryId"
+          ref="countryDropdownRef"
           class="form-select">
     <option selected value="0">All countries</option>
-    <option v-for="country in countries" :value="country.id" :key="country.id">
-      {{country.country_name}}</option>
+    <option v-for="country in countries" :value="country.countryId" :key="country.countryId">
+      {{ country.countryName }}
+    </option>
   </select>
 </template>
 
@@ -19,22 +21,26 @@ export default {
       selectedCountryId: 0,
       countries: [
         {
-          id: 0,
-          confederationId: 0,
-          country_name: ''
+          countryId: 0,
+          countryName: ''
         }
       ]
     }
   },
   methods: {
     sendGetCountriesRequest() {
-      this.$http.get("/countries")
+      this.$http.get(`/countries/${this.selectedConfederationId}`)
           .then(response => {
             this.countries = response.data
           })
           .catch(error => {
             router.push({name: 'errorRoute'})
           })
+    },
+
+    getSelectedConfederationId(confederationId) {
+      this.selectedConfederationId = confederationId
+      this.sendGetCountriesRequest()
     },
 
     emitSelectedCountryId() {

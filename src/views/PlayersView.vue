@@ -3,17 +3,16 @@
   <div class="container text-center">
     <div class="row">
       <div class="col">
-        <ConfederationDropdown/>
+        <ConfederationDropdown ref="confederationDropdownRef" @event-selected-confederation-change="setConfederationId"/>
       </div>
       <div class="col">
-        Country dropdown
+        <CountryDropdown ref="countryDropdownRef"/>
       </div>
       <div class="col">
         League dropdown
       </div>
       <div class="col">
         Club dropdown
-        <ClubDropdown/>
       </div>
       <div class="col">
         Search field
@@ -30,6 +29,7 @@
     </div>
     <div class="row">
 <!--      todo: Add Players table functionality-->
+      <PlayersTable/>
     </div>
   </div>
 </template>
@@ -38,17 +38,25 @@
 
 import PlayersTable from "@/components/table/PlayersTable.vue";
 import ConfederationDropdown from "@/components/dropdown/ConfederationDropdown.vue";
-import ClubDropdown from "@/components/dropdown/ClubDropdown.vue";
+import CountryDropdown from "@/components/dropdown/CountryDropdown.vue";
 
 export default {
   name: "PlayersView",
-  components: {ClubDropdown, ConfederationDropdown},
+  components: {CountryDropdown, ConfederationDropdown, PlayersTable},
+
   data() {
     return {
-      errorMessage:'',
-      successMessage:''
+      errorMessage: '',
+      successMessage: '',
+
+      confederationId: 0
     }
+  },
+  methods: {
+    setConfederationId(selectedConfederationId) {
+      this.confederationId = selectedConfederationId
+      this.$refs.countryDropdownRef.getSelectedConfederationId(selectedConfederationId)
+    },
   }
 }
-
 </script>

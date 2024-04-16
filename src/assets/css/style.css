@@ -21,3 +21,9 @@
     left: 50%; /* Vasak paigutus on 50% */
     transform: translateX(-50%); /* Teisendab X-telje piki -50% võrra */
 }
+
+/* Bootstrap Table Customization */
+.rounded-table {
+    border-radius: 10px; /* Adjust the value as per your preference */
+    overflow: hidden;
+}
