@@ -21,12 +21,13 @@
             Player Name
           </router-link>
         </td>
-<!--                <td>{{player.playerBirthDate }}</td>-->
-<!--                <td>{{player.playerHeight }}</td>-->
-<!--                <td>{{player.playerWeight }}</td>-->
-<!--                <td>{{ player.playerNationality }}</td>-->
+        <td>{{player.birthDate }}</td>
+        <td>{{player.height }}</td>
+        <td>{{player.weight }}</td>
+        <td>{{ player.nationality }}</td>
         <td>
-          <font-awesome-icon :icon="['far', 'square-check']" />
+          <div v-if="player.observationExists"><font-awesome-icon :icon="['far', 'square-check']" /></div>
+          <div v-else><font-awesome-icon :icon="['far', 'square']" /></div>
         </td>
         <td>
           <font-awesome-icon @click="" class="link-success cursor-pointer"
@@ -43,6 +44,8 @@
 </template>
 
 <script>
+import router from "@/router";
+
 export default {
   name: "PlayersTable",
 
@@ -54,19 +57,27 @@ export default {
         {
           playerId: 0,
           playerName: '',
-          // todo: lisada mangija andmed player_details tabelist
+          nationality: '',
+          birthDate: '',
+          height: 0,
+          weight: 0,
+          observationExists: false
         }
       ],
-      player: {
-        playerId: 0,
-        playerName: '',
-        // todo: lisada mangija andmed player_details tabelist
-      }
+      // player: {
+      //   playerId: 0,
+      //   playerName: '',
+      //   // todo: lisada mangija andmed player_details tabelist kui vaja
+      // }
     }
   },
   methods: {
     handlePlayerClick(playerId) {
-      this.$emit('event-selected-player-click', playerId)
+      // URL + query/request parameter example
+      // router.push({name: 'locationRoute', query: {locationId: locationId}})
+
+      // URL + path variable
+      router.push({name: 'observationsRoute', params: {playerId: playerId}})
     }
   }
 

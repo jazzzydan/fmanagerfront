@@ -29,7 +29,7 @@
     </div>
     <div class="row">
 <!--      todo: Add Players table functionality-->
-      <PlayersTable ref="playersTableRef" @event-selected-player-click="forwardPlayerId" />
+      <PlayersTable ref="playersTableRef"/>
     </div>
   </div>
 </template>
@@ -79,11 +79,7 @@ export default {
       // this.$refs.playersTableRef.getSelectedClubId(selectedClubId)
     },
 
-    forwardPlayerId(playerId) {
-      this.$emit('event-selected-player-click', playerId)
-    }
   }
 }
-
 
 </script>

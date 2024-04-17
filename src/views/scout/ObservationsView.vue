@@ -10,6 +10,11 @@
 <script>
 export default {
   name: "ObservationsView",
+  components: {},
+  props: {
+    // URL + path variable
+    playerId: String
+  },
 
   data() {
     return {
