@@ -1,9 +1,7 @@
 <template>
-  <div class="input-group">
-    <input v-model="playerName"
-           ref="playerSearchInputRef" type="text"
-           class ="form-control"
-           @change = "emitPlayerSearchName">
+  <div>
+    <input v-model="playerName" type="text" class="form-control" placeholder="Search for a player...">
+    <button @click="searchPlayers" class="btn btn-primary">Search</button>
 
   </div>
 </template>
@@ -25,7 +23,7 @@ export default {
     },
   methods:{
 
-    emitPlayerSearchName() {
+    searchPlayers() {
       this.$emit('event-player-search-name-change', this.playerName);
 
     },

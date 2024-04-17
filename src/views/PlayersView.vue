@@ -15,8 +15,8 @@
         <ClubDropdown ref="clubDropdownRef" @event-selected-club-change="setClubId"/>
       </div>
       <div class="col">
-        <PlayerSearchInput ref="playerSearchInputRef" @event-player-search-name-change = "setPlayerSearch"/>
-        <button @click =" getPlayerSearch" class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+        <PlayerSearchInput @event-player-search-name-change = "getPlayerSearch"/>
+
           </div>
         </div>
       </div>
@@ -90,7 +90,7 @@ export default {
     },
 
 
-    getPlayerSearch(){
+    getPlayerSearch(playerName){
       this.playerName = this.$refs.playerSearchInputRef.playerName;
     }
 
