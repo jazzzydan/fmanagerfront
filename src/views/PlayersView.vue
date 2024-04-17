@@ -15,10 +15,11 @@
         <ClubDropdown ref="clubDropdownRef" @event-selected-club-change="setClubId"/>
       </div>
       <div class="col">
-        Search field
+        <PlayerSearchInput ref="playerSearchInputRef" @event-player-search-name-change = "setPlayerSearch"/>
+        <button @click =" getPlayerSearch" class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
   <div class="row">
     <div class="col"></div>
     <div class="col"></div>
@@ -41,10 +42,18 @@ import ConfederationDropdown from "@/components/dropdown/ConfederationDropdown.v
 import ClubDropdown from "@/components/dropdown/ClubDropdown.vue";
 import CountryDropdown from "@/components/dropdown/CountryDropdown.vue";
 import LeagueDropdown from "@/components/dropdown/LeagueDropdown.vue";
+import PlayerSearchInput from "@/components/input/PlayerSearchInput.vue";
+import router from "@/router";
+import playerSearchInput from "@/components/input/PlayerSearchInput.vue";
 
 export default {
   name: "PlayersView",
-  components: {LeagueDropdown, ClubDropdown, CountryDropdown, ConfederationDropdown, PlayersTable},
+  computed: {
+    playerSearchInput() {
+      return playerSearchInput
+    }
+  },
+  components: {PlayerSearchInput, LeagueDropdown, ClubDropdown, CountryDropdown, ConfederationDropdown, PlayersTable},
 
   data() {
     return {
@@ -54,7 +63,8 @@ export default {
       confederationId: 0,
       countryId: 0,
       leagueId: 0,
-      clubId: 0
+      clubId: 0,
+      playerName:0
     }
   },
   methods: {
@@ -78,6 +88,12 @@ export default {
       this.clubId = selectedClubId
       // this.$refs.playersTableRef.getSelectedClubId(selectedClubId)
     },
+
+
+    getPlayerSearch(){
+      this.playerName = this.$refs.playerSearchInputRef.playerName;
+    }
+
 
   }
 }
