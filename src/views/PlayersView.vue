@@ -6,7 +6,7 @@
         <ConfederationDropdown ref="confederationDropdownRef" @event-selected-confederation-change="setConfederationId"/>
       </div>
       <div class="col">
-        <CountryDropdown ref="countryDropdownRef"/>
+        <CountryDropdown ref="countryDropdownRef" @event-selected-country-change = "setCountryId"/>
       </div>
       <div class="col">
         <LeagueDropdown ref="leagueDropdownRef" @event-selected-league-change = "setLeagueId"/>
@@ -63,6 +63,12 @@ export default {
       this.$refs.countryDropdownRef.getSelectedConfederationId(selectedConfederationId)
 
     },
+
+    setCountryId(selectedCountryId) {
+      this.countryId = selectedCountryId
+      this.$refs.leagueDropdownRef.getSelectedCountryId(selectedCountryId)
+    },
+
     setLeagueId(selectedLeagueId) {
       this.leagueId = selectedLeagueId
       this.$refs.clubDropdownRef.getSelectedLeagueId(selectedLeagueId)
@@ -70,7 +76,7 @@ export default {
 
     setClubId(selectedClubId) {
       this.clubId = selectedClubId
-      this.$refs.playersTableRef.getSelectedClubId(selectedClubId)
+      // this.$refs.playersTableRef.getSelectedClubId(selectedClubId)
     },
   }
 }

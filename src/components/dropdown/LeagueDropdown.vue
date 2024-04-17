@@ -37,7 +37,7 @@ export default {
           })
     },
 
-    getSelectedClubId(countryId) {
+    getSelectedCountryId(countryId) {
       this.selectedCountryId = countryId
       this.sendGetLeaguesRequest()
     },
