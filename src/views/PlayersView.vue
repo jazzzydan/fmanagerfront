@@ -13,6 +13,7 @@
       </div>
       <div class="col">
         Club dropdown
+        <ClubDropdown ref="clubDropdownRef"/>
       </div>
       <div class="col">
         Search field
@@ -38,6 +39,7 @@
 
 import PlayersTable from "@/components/table/PlayersTable.vue";
 import ConfederationDropdown from "@/components/dropdown/ConfederationDropdown.vue";
+import ClubDropdown from "@/components/dropdown/ClubDropdown.vue";
 import CountryDropdown from "@/components/dropdown/CountryDropdown.vue";
 
 export default {
@@ -46,17 +48,22 @@ export default {
 
   data() {
     return {
-      errorMessage: '',
-      successMessage: '',
+      errorMessage:'',
+      successMessage:'',
 
-      confederationId: 0
+      confederationId:0
     }
   },
   methods: {
     setConfederationId(selectedConfederationId) {
       this.confederationId = selectedConfederationId
       this.$refs.countryDropdownRef.getSelectedConfederationId(selectedConfederationId)
+
     },
-  }
-}
+    getSelectedClubId(clubId) {
+      this.selectedLeagueClubId = selectedClubId
+      this.$refs.clubDropdownRef.getSelectedClubId()
+    },
+
+
 </script>

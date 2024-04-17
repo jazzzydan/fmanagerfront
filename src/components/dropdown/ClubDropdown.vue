@@ -1,6 +1,7 @@
 <template>
   <select v-model="selectedLeagueClubId"
           @change="emitSelectedLeagueClubId"
+          ref="clubDropdown"
           class="form-select">
     <option selected value="0">Clubs</option>
     <option v-for="club in clubs" :value="club.clubId" :key="club.clubId">
@@ -29,13 +30,18 @@ export default {
   },
   methods: {
     sendGetLeagueClubsRequest() {
-      this.$http.get("/leagueclubs")
+      //this.$http.get(`/countries/${this.selectedConfederationId}`)
+      this.$http.get(`/leagueclubs${this.selectedLeagueId}`)
           .then(response => {
             this.clubs = response.data
           })
           .catch(error => {
             router.push({name: 'errorRoute'})
           })
+    },
+    getSelectedClubId(clubId) {
+      this.selectedLeagueClubId = clubId
+      this.sendGetLeagueClubsRequest()
     },
     emitSelectedLeagueClubId() {
       this.$emit('event-selected-club-change' ,this.selectedLeagueClubId);
