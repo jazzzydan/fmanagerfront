@@ -11,8 +11,8 @@
       </template>
 
       <template v-else-if="isScout" >
-        <router-link to="/players">Players</router-link> |
-        <router-link to="/observations">Observations</router-link> |
+        <router-link to="/players" @event-selected-player-click="forwardPlayerId" >Players</router-link> |
+        <router-link to="/observations" ref="observationsViewRef">Observations</router-link> |
         <router-link to="/games">Games</router-link> |
       </template>
 
@@ -64,6 +64,10 @@ export default {
     openLogOutModal() {
       this.$refs.logOutModalRef.$refs.modalRef.openModal()
     },
+
+    forwardPlayerId(playerId) {
+      this.$refs.observationsViewRef.forwardPlayerId(playerId)
+    }
 
   },
   mounted() {

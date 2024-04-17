@@ -4,10 +4,10 @@
       <thead>
       <tr>
         <th scope="col">Players name</th>
+        <th scope="col">Nationality</th>
         <th scope="col">Birth date</th>
         <th scope="col">Height</th>
         <th scope="col">Weight</th>
-        <th scope="col">Nationality</th>
         <th scope="col">Monitoring</th>
         <th scope="col"></th>
         <th scope="col"></th>
@@ -16,17 +16,17 @@
       <tbody>
       <tr v-for="player in players" :key="player.playerId">
         <td>
-          <router-link to="/observations" @click="handleRouteClick(player.playerId)">
+          <router-link to="/observations" @click="handlePlayerClick(player.playerId)">
             <!--            {{ player.playerName }}-->
             Player Name
           </router-link>
         </td>
-        <!--        <td>{{ player.playerBirthDate }}</td>-->
-        <!--        <td>{{ player.playerHeight }}</td>-->
-        <!--        <td>{{ player.playerWeight }}</td>-->
-        <!--        <td>{{ player.playerNationality }}</td>-->
+<!--                <td>{{player.playerBirthDate }}</td>-->
+<!--                <td>{{player.playerHeight }}</td>-->
+<!--                <td>{{player.playerWeight }}</td>-->
+<!--                <td>{{ player.playerNationality }}</td>-->
         <td>
-
+          <font-awesome-icon :icon="['far', 'square-check']" />
         </td>
         <td>
           <font-awesome-icon @click="" class="link-success cursor-pointer"
@@ -65,8 +65,8 @@ export default {
     }
   },
   methods: {
-    handleRouteClick(playerId) {
-      this.$emit(playerId)
+    handlePlayerClick(playerId) {
+      this.$emit('event-selected-player-click', playerId)
     }
   }
 
