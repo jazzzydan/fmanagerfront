@@ -6,7 +6,7 @@
         <ConfederationDropdown ref="confederationDropdownRef" @event-selected-confederation-change="setConfederationId"/>
       </div>
       <div class="col">
-        <CountryDropdown ref="countryDropdownRef"/>
+        <CountryDropdown ref="countryDropdownRef" @event-selected-country-change="setCountryId"/>
       </div>
       <div class="col">
         League dropdown
@@ -29,7 +29,7 @@
     </div>
     <div class="row">
 <!--      todo: Add Players table functionality-->
-      <PlayersTable ref="playersTableRef" @event-selected-player-click="forwardPlayerId" />
+      <PlayersTable ref="playersTableRef"/>
     </div>
   </div>
 </template>
@@ -62,6 +62,13 @@ export default {
       this.$refs.countryDropdownRef.getSelectedConfederationId(selectedConfederationId)
 
     },
+
+    setCountryId(selectedCountryId) {
+      this.countryId = selectedCountryId
+      // this.$refs.leagueDropdownRef.getSelectedCountryId(selectedCountryId)
+
+    },
+
     setLeagueId(selectedLeagueId) {
       this.leagueId = selectedLeagueId
       this.$refs.clubDropdownRef.getSelectedLeagueId(selectedLeagueId)
@@ -72,11 +79,7 @@ export default {
       this.$refs.playersTableRef.getSelectedClubId(selectedClubId)
     },
 
-    forwardPlayerId(playerId) {
-      this.$emit('event-selected-player-click', playerId)
-    }
   }
 }
-
 
 </script>

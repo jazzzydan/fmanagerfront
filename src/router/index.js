@@ -54,9 +54,11 @@ const routes = [
         component: PlayersView
     },
     {
-        path: '/observations',
+        path: '/observations/:playerId?',
         name: 'observationsRoute',
-        component: ObservationsView
+        component: ObservationsView,
+        // URL + path variable
+        props: true
     },
     {
         path: '/games',
