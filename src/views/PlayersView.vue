@@ -12,8 +12,7 @@
         League dropdown
       </div>
       <div class="col">
-        Club dropdown
-        <ClubDropdown ref="clubDropdownRef"/>
+        <ClubDropdown ref="clubDropdownRef" @event-selected-club-change="setClubId"/>
       </div>
       <div class="col">
         Search field
@@ -44,14 +43,17 @@ import CountryDropdown from "@/components/dropdown/CountryDropdown.vue";
 
 export default {
   name: "PlayersView",
-  components: {CountryDropdown, ConfederationDropdown, PlayersTable},
+  components: {ClubDropdown, CountryDropdown, ConfederationDropdown, PlayersTable},
 
   data() {
     return {
-      errorMessage:'',
-      successMessage:'',
+      errorMessage: '',
+      successMessage: '',
 
-      confederationId:0
+      confederationId: 0,
+      countryId: 0,
+      leagueId: 0,
+      clubId: 0
     }
   },
   methods: {
@@ -60,10 +62,17 @@ export default {
       this.$refs.countryDropdownRef.getSelectedConfederationId(selectedConfederationId)
 
     },
-    getSelectedClubId(clubId) {
-      this.selectedLeagueClubId = selectedClubId
-      this.$refs.clubDropdownRef.getSelectedClubId()
+    setLeagueId(selectedLeagueId) {
+      this.leagueId = selectedLeagueId
+      this.$refs.clubDropdownRef.getSelectedLeagueId(selectedLeagueId)
     },
+
+    setClubId(selectedClubId) {
+      this.clubId = selectedClubId
+      this.$refs.playersTableRef.getSelectedClubId(selectedClubId)
+    },
+  }
+}
 
 
 </script>

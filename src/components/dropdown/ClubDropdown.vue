@@ -1,11 +1,12 @@
 <template>
-  <select v-model="selectedLeagueClubId"
-          @change="emitSelectedLeagueClubId"
-          ref="clubDropdown"
+  <select v-model="selectedClubId"
+          @change="emitSelectedClubId"
+          ref="clubDropdownRef"
           class="form-select">
-    <option selected value="0">Clubs</option>
+    <option selected value="0">All clubs</option>
     <option v-for="club in clubs" :value="club.clubId" :key="club.clubId">
-      {{club.clubName}}</option>
+      {{club.clubName}}
+    </option>
   </select>
 </template>
 
@@ -18,7 +19,7 @@ export default {
   data() {
     return {
       selectedLeagueId: 0,
-      selectedLeagueClubId: 0,
+      selectedClubId: 0,
       clubs: [
         {
           clubId: 0,
@@ -29,9 +30,8 @@ export default {
     }
   },
   methods: {
-    sendGetLeagueClubsRequest() {
-      //this.$http.get(`/countries/${this.selectedConfederationId}`)
-      this.$http.get(`/leagueclubs${this.selectedLeagueId}`)
+    sendGetClubsRequest() {
+      this.$http.get(`/clubs/${this.selectedLeagueId}`)
           .then(response => {
             this.clubs = response.data
           })
@@ -39,17 +39,17 @@ export default {
             router.push({name: 'errorRoute'})
           })
     },
-    getSelectedClubId(clubId) {
-      this.selectedLeagueClubId = clubId
-      this.sendGetLeagueClubsRequest()
+    getSelectedLeagueId(leagueId) {
+      this.selectedLeagueId = leagueId
+      this.sendGetClubsRequest()
     },
-    emitSelectedLeagueClubId() {
-      this.$emit('event-selected-club-change' ,this.selectedLeagueClubId);
+    emitSelectedClubId() {
+      this.$emit('event-selected-club-change' ,this.selectedClubId);
     }
 
   },
   beforeMount() {
-    this.sendGetLeagueClubsRequest()
+    this.sendGetClubsRequest()
   }
 }
 </script>
