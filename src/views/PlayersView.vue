@@ -9,7 +9,7 @@
         <CountryDropdown ref="countryDropdownRef"/>
       </div>
       <div class="col">
-        League dropdown
+        <LeagueDropdown ref="leagueDropdownRef" @event-selected-league-change = "setLeagueId"/>
       </div>
       <div class="col">
         <ClubDropdown ref="clubDropdownRef" @event-selected-club-change="setClubId"/>
@@ -40,10 +40,11 @@ import PlayersTable from "@/components/table/PlayersTable.vue";
 import ConfederationDropdown from "@/components/dropdown/ConfederationDropdown.vue";
 import ClubDropdown from "@/components/dropdown/ClubDropdown.vue";
 import CountryDropdown from "@/components/dropdown/CountryDropdown.vue";
+import LeagueDropdown from "@/components/dropdown/LeagueDropdown.vue";
 
 export default {
   name: "PlayersView",
-  components: {ClubDropdown, CountryDropdown, ConfederationDropdown, PlayersTable},
+  components: {LeagueDropdown, ClubDropdown, CountryDropdown, ConfederationDropdown, PlayersTable},
 
   data() {
     return {
