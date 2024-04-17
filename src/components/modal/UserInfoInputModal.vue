@@ -6,40 +6,40 @@
     </template>
     <template #body>
       <div class="container text-end">
-        <div class="row">
-          <div class="col">
+        <div class="row mb-3">
+          <div class="col align-content-md-center">
             User role:
           </div>
           <div class="col">
             <UserRoleDropdown/>
           </div>
           </div>
-        <div class="row">
-          <div class="col">
+        <div class="row mb-3">
+          <div class="col align-content-md-center">
             User name:
           </div>
           <div class="col">
             <input v-model="username" type="text" class="form-control" id="username">
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div class="row mb-3">
+          <div class="col align-content-md-center">
             E-mail:
           </div>
           <div class="col">
             <input v-model="email" type="email" class="form-control" id="email">
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div class="row mb-3">
+          <div class="col align-content-md-center">
             Password:
           </div>
           <div class="col">
             <input v-model="password" type="password" class="form-control" id="password">
           </div>
         </div>
-        <div class="row">
-          <div class="col">
+        <div class="row mb-3">
+          <div class="col align-content-md-center">
             Confirm password:
           </div>
           <div class="col">
