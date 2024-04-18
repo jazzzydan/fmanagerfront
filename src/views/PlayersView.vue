@@ -32,7 +32,6 @@
       Add player button
     </div>
     <div class="row">
-      <!--      todo: Add Players table functionality-->
       <PlayersTable ref="playersTableRef"/>
     </div>
   </div>
@@ -98,13 +97,19 @@ export default {
     },
 
     searchPlayer(playerName) {
+      this.updatePlayersRequest(playerName)
+      this.$refs.playersTableRef.updatePlayersTable(this.playersRequest)
+      this.playersRequest.playerName = ''
+    },
+
+    updatePlayersRequest(playerName) {
       this.playersRequest.playerName = playerName
       this.playersRequest.confederationId = 0
       this.playersRequest.countryId = 0
       this.playersRequest.leagueId = 0
       this.playersRequest.clubId = 0
-      this.handleDropdownChange()
-    }
+    },
+
   },
 
 }
