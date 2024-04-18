@@ -15,8 +15,7 @@
         <ClubDropdown ref="clubDropdownRef" @event-selected-club-change="setClubId"/>
       </div>
       <div class="col">
-        <PlayerSearchInput @event-player-search-name-change = "getPlayerSearch"/>
-
+        <PlayerSearchInput @event-player-search-name-enter = "searchPlayer"/>
           </div>
         </div>
       </div>
@@ -90,8 +89,8 @@ export default {
     },
 
 
-    getPlayerSearch(playerName){
-      this.playerName = this.$refs.playerSearchInputRef.playerName;
+    searchPlayer(playerName){
+
     }
 
 
