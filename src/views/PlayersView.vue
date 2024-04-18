@@ -19,10 +19,10 @@
                       @event-selected-club-change="setClubId"/>
       </div>
       <div class="col">
-        Search field
+        <PlayerSearchInput @event-player-search-name-enter = "searchPlayer"/>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
   <div class="row">
     <div class="col"></div>
     <div class="col"></div>
@@ -45,6 +45,7 @@ import ConfederationDropdown from "@/components/dropdown/ConfederationDropdown.v
 import ClubDropdown from "@/components/dropdown/ClubDropdown.vue";
 import CountryDropdown from "@/components/dropdown/CountryDropdown.vue";
 import LeagueDropdown from "@/components/dropdown/LeagueDropdown.vue";
+import PlayerSearchInput from "@/components/input/PlayerSearchInput.vue";
 import router from "@/router";
 import PlayerDetailsModal from "@/components/modal/PlayerDetailsModal.vue";
 
@@ -99,6 +100,13 @@ export default {
 
   },
 
+
+    searchPlayer(playerName){
+
+    }
+
+
+  }
 }
 
 </script>
