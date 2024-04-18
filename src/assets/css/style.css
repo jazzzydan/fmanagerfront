@@ -14,6 +14,10 @@
     overflow: hidden; /* Peidab ülejäänud sisu, mis ei mahu alale */
 }
 
+.custom-modal {
+    background: rgba(209, 230, 220, 1); /* Set your desired background color */
+}
+
 /* Rakenda järgmised stiilid modaalakna sisule */
 .modal-dialog {
     position: fixed; /* Positsiooni tüüp on fikseeritud */

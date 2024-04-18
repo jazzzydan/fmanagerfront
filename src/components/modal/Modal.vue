@@ -1,9 +1,9 @@
 <template>
   <!-- Modal -->
   <div v-if="isOpen" class="modal-backdrop fade show d-block"/>
-  <FocusTrap v-if="isOpen" class="modal fade show" tabindex="-1" style="display: block;">
+    <FocusTrap v-if="isOpen" class="modal fade show" tabindex="-1" style="display: block;">
     <div class="modal-dialog" ref="Modal">
-      <div class="modal-content">
+      <div class="modal-content custom-modal">
         <div class="modal-header">
           <h1 class="modal-title fs-5">
             <slot name="title">
@@ -26,7 +26,9 @@
         </div>
       </div>
     </div>
+
   </FocusTrap>
+
 </template>
 
 
