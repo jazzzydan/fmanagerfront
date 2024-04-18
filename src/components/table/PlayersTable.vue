@@ -41,7 +41,7 @@
                                    :icon="['far', 'pen-to-square']"/>
               </td>
               <td>
-                <font-awesome-icon @click="" class="link-danger cursor-pointer"
+                <font-awesome-icon @click="openDeleteInfoModal" class="link-danger cursor-pointer"
                                    :icon="['far', 'trash-can']"/>
               </td>
             </tr>
@@ -87,6 +87,7 @@ export default {
       ]
     }
   },
+
   methods: {
 
     sendGetPlayersRequest() {
@@ -116,6 +117,9 @@ export default {
 
     },
 
+    openDeleteInfoModal(playerId) {
+      this.$refs.deletePlayerModalRef.$refs.modalRef.openModal();
+    },
   },
 
   beforeMount() {

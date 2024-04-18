@@ -34,6 +34,9 @@
     <div class="row">
       <!--      todo: Add Players table functionality-->
       <PlayersTable ref="playersTableRef"/>
+      <DeletePlayerModal ref="deletePlayerModalRef" :playerId="selectedPlayerId" @event-player-deleted="handlePlayerDeleted" />
+
+
     </div>
   </div>
 </template>
@@ -47,26 +50,33 @@ import CountryDropdown from "@/components/dropdown/CountryDropdown.vue";
 import LeagueDropdown from "@/components/dropdown/LeagueDropdown.vue";
 import PlayerSearchInput from "@/components/input/PlayerSearchInput.vue";
 import PlayerDetailsModal from "@/components/modal/PlayerDetailsModal.vue";
+import DeletePlayerModal from "@/components/modal/DeletePlayerModal.vue";
 
 export default {
   name: "PlayersView",
-  components: {PlayerDetailsModal, LeagueDropdown, ClubDropdown, CountryDropdown, ConfederationDropdown, PlayersTable, PlayerSearchInput},
+  components: {
+    DeletePlayerModal,
+    PlayerDetailsModal, LeagueDropdown, ClubDropdown, CountryDropdown, ConfederationDropdown, PlayersTable, PlayerSearchInput},
 
   data() {
     return {
       errorMessage: '',
       successMessage: '',
 
+      selectedPlayerId: 0,
+
       playersRequest: {
         confederationId: 0,
         countryId: 0,
         leagueId: 0,
         clubId: 0,
-        playerName: ''
+        playerName: '',
+        playerId: '',
       }
 
     }
   },
+
   methods: {
     setConfederationId(selectedConfederationId) {
       this.playersRequest.confederationId = selectedConfederationId
@@ -104,8 +114,24 @@ export default {
       this.playersRequest.leagueId = 0
       this.playersRequest.clubId = 0
       this.handleDropdownChange()
-    }
-  },
+    },
+    handlePlayerDeleted(playerId) {
+      // Handle the player deleted event if needed.
+      // Respond to the event emitted when a player is successfully deleted.
+    },
+
+    // openDeleteInfoModal(playerId) {
+    //   // Check if the component has been mounted
+    //   if (this.$refs.deletePlayerModalRef) {
+    //     // Access the $refs property if it exists
+    //     this.$refs.deletePlayerModalRef.$refs.modalRef.openModal();
+    //   } else {
+    //     // Handle the case when the component has not been mounted
+    //     console.error('DeletePlayerModal component has not been mounted yet');
+    //   }
+    },
+
+
 
 }
 
