@@ -2,7 +2,7 @@
 
   <Modal ref="modalRef">
     <template #title>
-      Add new player
+
 
     </template>
     <template #body>
@@ -78,7 +78,7 @@ import Modal from "@/components/modal/Modal.vue";
 import ClubDropdown from "@/components/dropdown/ClubDropdown.vue";
 
 export default {
-  name: "PlayerDetailsModal",
+  name: "AddPlayersModal",
   components: {ClubDropdown, Modal},
   data() {
     return {

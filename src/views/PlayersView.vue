@@ -26,18 +26,23 @@
   <div class="row">
 
     <div class="col">
-      <AddPlayerButton ref="addPlayerModalRef"/>
+      <AddPlayersModal ref="addPlayerModalRef"/>
       <div class="d-grid gap-2 col-6 mx-auto">
         <button @click="openAddPlayerModal" class="btn btn-primary" type="button">Add Player</button>
         <br>
     </div>
     </div>
   </div>
+
+
+
+
     <div class="row">
       <!--      todo: Add Players table functionality-->
       <PlayersTable ref="playersTableRef"/>
     </div>
-
+        <div>
+        </div>
 </template>
 
 <script>
@@ -51,7 +56,7 @@ import PlayerSearchInput from "@/components/input/PlayerSearchInput.vue";
 import router from "@/router";
 import PlayerDetailsModal from "@/components/modal/PlayerDetailsModal.vue";
 import AddPlayerModal from "@/components/modal/AddPlayerModal.vue";
-import AddPlayerButton from "@/components/button/AddPlayerButton.vue";
+import AddPlayersModal from "@/components/modal/AddPlayerModal.vue";
 
 export default {
   name: "PlayersView",
@@ -61,6 +66,7 @@ export default {
     }
   },
   components: {
+    AddPlayersModal,
     AddPlayerButton,
     PlayerDetailsModal,
     LeagueDropdown,
