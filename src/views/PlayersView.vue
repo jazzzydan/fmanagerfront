@@ -24,18 +24,20 @@
         </div>
       </div>
   <div class="row">
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"></div>
+
     <div class="col">
-      Add player button
+      <AddPlayerButton ref="addPlayerModalRef"/>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button @click="openAddPlayerModal" class="btn btn-primary" type="button">Add Player</button>
+        <br>
     </div>
+    </div>
+  </div>
     <div class="row">
       <!--      todo: Add Players table functionality-->
       <PlayersTable ref="playersTableRef"/>
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -48,10 +50,26 @@ import LeagueDropdown from "@/components/dropdown/LeagueDropdown.vue";
 import PlayerSearchInput from "@/components/input/PlayerSearchInput.vue";
 import router from "@/router";
 import PlayerDetailsModal from "@/components/modal/PlayerDetailsModal.vue";
+import AddPlayerModal from "@/components/modal/AddPlayerModal.vue";
+import AddPlayerButton from "@/components/button/AddPlayerButton.vue";
 
 export default {
   name: "PlayersView",
-  components: {PlayerDetailsModal, LeagueDropdown, ClubDropdown, CountryDropdown, ConfederationDropdown, PlayersTable},
+  computed: {
+    AddPlayerModal() {
+      return AddPlayerModal
+    }
+  },
+  components: {
+    AddPlayerButton,
+    PlayerDetailsModal,
+    LeagueDropdown,
+    ClubDropdown,
+    CountryDropdown,
+    ConfederationDropdown,
+    PlayersTable,
+    PlayerSearchInput
+  },
 
   data() {
     return {
@@ -97,15 +115,17 @@ export default {
     handleDropdownChange() {
       this.$refs.playersTableRef.updatePlayersTable(this.playersRequest)
     },
-
-  },
-
-
-    searchPlayer(playerName){
-
-    }
-
-
+    searchPlayer(playerName) {
+      this.playersRequest.playerName = playerName
+      this.playersRequest.confederationId = 0
+      this.playersRequest.countryId = 0
+      this.playersRequest.leagueId = 0
+      this.playersRequest.clubId = 0
+      this.playersRequest.playerName = ''
+    },
+    openAddPlayerModal() {
+      this.$refs.addPlayerModalRef.$refs.modalRef.openModal()
+    },
   }
 }
 
