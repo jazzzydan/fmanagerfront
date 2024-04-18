@@ -19,10 +19,10 @@
                       @event-selected-club-change="setClubId"/>
       </div>
       <div class="col">
-        <PlayerSearchInput @event-player-search-name-enter = "searchPlayer"/>
-          </div>
-        </div>
+        <PlayerSearchInput @event-player-search-name-enter="searchPlayer"/>
       </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col"></div>
     <div class="col"></div>
@@ -46,12 +46,11 @@ import ClubDropdown from "@/components/dropdown/ClubDropdown.vue";
 import CountryDropdown from "@/components/dropdown/CountryDropdown.vue";
 import LeagueDropdown from "@/components/dropdown/LeagueDropdown.vue";
 import PlayerSearchInput from "@/components/input/PlayerSearchInput.vue";
-import router from "@/router";
 import PlayerDetailsModal from "@/components/modal/PlayerDetailsModal.vue";
 
 export default {
   name: "PlayersView",
-  components: {PlayerDetailsModal, LeagueDropdown, ClubDropdown, CountryDropdown, ConfederationDropdown, PlayersTable},
+  components: {PlayerDetailsModal, LeagueDropdown, ClubDropdown, CountryDropdown, ConfederationDropdown, PlayersTable, PlayerSearchInput},
 
   data() {
     return {
@@ -98,15 +97,16 @@ export default {
       this.$refs.playersTableRef.updatePlayersTable(this.playersRequest)
     },
 
+    searchPlayer(playerName) {
+      this.playersRequest.playerName = playerName
+      this.playersRequest.confederationId = 0
+      this.playersRequest.countryId = 0
+      this.playersRequest.leagueId = 0
+      this.playersRequest.clubId = 0
+      this.handleDropdownChange()
+    }
   },
 
-
-    searchPlayer(playerName){
-
-    }
-
-
-  }
 }
 
 </script>
