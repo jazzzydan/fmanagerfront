@@ -20,9 +20,9 @@
             <tbody>
             <tr v-for="player in players" :key="player.playerId">
               <td style="text-align: left;">
-                <router-link to="/observations" @click="handlePlayerClick(player.playerId)">
+                <div @click="handlePlayerClick(player.playerId)">
                   {{ player.playerName }}
-                </router-link>
+                </div>
               </td>
               <td>{{ player.nationality }}</td>
               <td>{{ player.birthDate }}</td>

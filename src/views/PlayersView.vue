@@ -108,6 +108,8 @@ export default {
       this.playersRequest.countryId = 0
       this.playersRequest.leagueId = 0
       this.playersRequest.clubId = 0
+
+      // todo: update dropdowns to comply with id = 0
     },
 
   },
