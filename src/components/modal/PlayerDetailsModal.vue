@@ -2,8 +2,8 @@
 
   <Modal ref="modalRef">
     <template #title>
-
-      <!--      todo: if playerId is null -> Add player, else -> player Name-->
+    <!--v-if -->
+      <!--      todo: if playerId is 0 -> Add player, else -> player Name-->
 
     </template>
     <template #body>
@@ -66,8 +66,10 @@
       </div>
     </template>
     <template #buttons>
+      <button @click="executeAddPlayer" type="button" class="btn btn-danger">Add player</button>
 
-      <!--      todo: if playerId is null -> Add player: POST, else -> Update: PUT-->
+      <!--v-if-->
+      <!--      todo: if playerId is 0 -> Add player: POST, else -> Update: PUT-->
 
     </template>
   </Modal>
@@ -84,6 +86,8 @@ export default {
   data() {
     return {
       playerId: 0,
+      playerNameConfirmation: '',
+
       playerDetails: {
         playerName: '',
         clubName: 0,
@@ -96,6 +100,40 @@ export default {
       }
     }
   },
+  methods: {
+    executeAddPlayer() {
+      if (this.playerNameInputConfirmed()) {
+        this.sendAddPlayerRequest()
+      } else (this.allFieldsHaveInput())
+      {
+        this.displayPlayerNameEqualityAlert()
+      }
+    },
+    playerNameInputConfirmed() {
+      if (this.playerName === this.playerNameConfirmation) {
+        return true
+      }
+    },
+    displayPlayerNameEqualityAlert() {
+      this.message = "PlayerName is not identical";
+      setTimeout(this.resetMessage, 4000);
+    },
+    resetMessage() {
+      this.message = ''
+    },
+    sendAdd() {
+      this.$http.post("/player", this.somePayloadDtoObject
+      ).then(response => {
+        const responseJSON = response.data
+      }).catch(error => {
+        const errorResponseJSON = error.response.data
+      })
+    },
+
+  },
+  mounted() {
+
+  }
 }
 </script>
 

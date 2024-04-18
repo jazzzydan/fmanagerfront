@@ -26,8 +26,9 @@
   <div class="row">
 
     <div class="col">
-      <AddPlayersModal ref="addPlayerModalRef"/>
-      <div class="d-grid gap-2 col-6 mx-auto">
+
+      <div class="d-grid gap-2 col-5 mx-auto">
+        <AddPlayerModal ref="addPlayerModalRef"/>
         <button @click="openAddPlayerModal" class="btn btn-primary" type="button">Add Player</button>
         <br>
     </div>
@@ -66,8 +67,8 @@ export default {
     }
   },
   components: {
+    AddPlayerModal,
     AddPlayersModal,
-    AddPlayerButton,
     PlayerDetailsModal,
     LeagueDropdown,
     ClubDropdown,

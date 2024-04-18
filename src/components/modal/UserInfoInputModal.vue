@@ -50,9 +50,9 @@
     </template>
 
     <template #buttons>
-      <slot name="buttons">
+
         <button @click="executeAddUser" type="button" class="btn btn-success">Add user</button>
-      </slot>
+
     </template>
 
   </Modal>

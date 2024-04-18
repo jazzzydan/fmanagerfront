@@ -2,8 +2,7 @@
 
   <Modal ref="modalRef">
     <template #title>
-
-
+      Add new player
     </template>
     <template #body>
       <div class="container text-end">
@@ -65,7 +64,7 @@
       </div>
     </template>
     <template #buttons>
-
+      <button @click="executeAddPlayer" type="button" class="btn btn-danger">Add player</button>
       <!--      todo: if playerId is null -> Add player: POST, else -> Update: PUT-->
 
     </template>
@@ -78,13 +77,14 @@ import Modal from "@/components/modal/Modal.vue";
 import ClubDropdown from "@/components/dropdown/ClubDropdown.vue";
 
 export default {
-  name: "AddPlayersModal",
+  name: "AddPlayerModal",
   components: {ClubDropdown, Modal},
   data() {
     return {
       playerId: 0,
       playerDetails: {
         playerName: '',
+        playerNameConfirmation: '',
         clubName: 0,
         gender: 'M',
         birthDate: '',
@@ -95,6 +95,40 @@ export default {
       }
     }
   },
+  methods: {
+    executeAddPlayer() {
+      if (this.playerNameInputConfirmed()) {
+        this.sendAddPlayerRequest()
+      } else (this.allFieldsHaveInput())
+      {
+        this.displayPlayerNameEqualityAlert()
+      }
+    },
+    playerNameInputConfirmed() {
+      if (this.playerName === this.playerNameConfirmation) {
+        return true
+      }
+    },
+    displayPlayerNameEqualityAlert() {
+      this.message = "PlayerName is not identical";
+      setTimeout(this.resetMessage, 4000);
+    },
+    resetMessage() {
+      this.message = ''
+    },
+    sendAdd() {
+      this.$http.post("/player", this.somePayloadDtoObject
+      ).then(response => {
+        const responseJSON = response.data
+      }).catch(error => {
+        const errorResponseJSON = error.response.data
+      })
+    },
+
+  },
+
+
 }
+
 </script>
 
