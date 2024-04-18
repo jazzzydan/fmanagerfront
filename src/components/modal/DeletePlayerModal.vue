@@ -1,5 +1,6 @@
 <template>
-  <Modal ref="modalRef">
+  <div class="container">
+  <Modal ref="deletePlayerModalRef">
     <template #body>
 
         <!--        <button @click = "" type="button" class="btn btn-danger"> Cancel</button>-->
@@ -7,6 +8,7 @@
 
     </template>
   </Modal>
+  </div>
 </template>
 
 
@@ -33,6 +35,7 @@ export default {
 
     methods: {
       async sendDeletePlayerRequest() {
+        // console.log("delete player")
         try {
           await axios.delete(`/players/${this.playerId}`);
           this.$emit('event-player-deleted', this.playerId);
