@@ -1,10 +1,12 @@
 <template>
-  <Modal ref="modalRef">
+  <Modal ref="modalRef">'
+    <template #title>
+      Log out?
+    </template>
     <template #body>
-      <br>
-      Are You sure You want to log out?
-      <br>
-      <br>
+      <div class="m-4">
+        Are You sure You want to log out?
+      </div>
     </template>
     <template #buttons>
       <button @click="executeLogOut" type="button" class="btn btn-success">Confirm</button>

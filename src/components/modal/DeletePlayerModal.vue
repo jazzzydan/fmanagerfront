@@ -1,16 +1,15 @@
 <template>
   <div class="container">
-  <Modal ref="deletePlayerModalRef">
-    <template #body>
-
-        <!--        <button @click = "" type="button" class="btn btn-danger"> Cancel</button>-->
+    <Modal ref="modalRef">
+      <template #body>
+        Delete player name X
+      </template>
+      <template #buttons>
         <button @click="sendDeletePlayerRequest" type="button" class="btn btn-danger">Delete player</button>
-
-    </template>
-  </Modal>
+      </template>
+    </Modal>
   </div>
 </template>
-
 
 
 <script>
@@ -23,28 +22,24 @@ import axios from "axios";
 export default {
   name: 'DeletePlayerModal',
   components: {Modal}, // // ... missing Info?
-  props: {
-    playerId: {
-      type: Number,
-      required: true
-    },
-
-    data() {
-      return {}
-    },
-
-    methods: {
-      async sendDeletePlayerRequest() {
-        // console.log("delete player")
-        try {
-          await axios.delete(`/players/${this.playerId}`);
-          this.$emit('event-player-deleted', this.playerId);
-        } catch (error) {
-          router.push({name: 'errorRoute'});
-        }
-      }
+  data() {
+    return {
+      playerId: 0,
     }
   },
+
+  methods: {
+    async sendDeletePlayerRequest() {
+      // console.log("delete player")
+      try {
+        await axios.delete(`/players/${this.playerId}`);
+        this.$emit('event-player-deleted', this.playerId);
+      } catch (error) {
+        router.push({name: 'errorRoute'});
+      }
+    }
+  }
+
 }
 
 

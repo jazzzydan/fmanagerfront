@@ -30,10 +30,11 @@
 </template>
 <script>
 import LogOutModal from "@/components/modal/LogOutModal.vue";
+import Modal from "@/components/modal/Modal.vue";
 
 export default {
   name: 'App',
-  components: {LogOutModal},
+  components: {Modal, LogOutModal},
   data() {
     return {
       isLoggedIn: false,

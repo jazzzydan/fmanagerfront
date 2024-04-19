@@ -34,9 +34,6 @@
     <div class="row">
       <!--      todo: Add Players table functionality-->
       <PlayersTable ref="playersTableRef"/>
-      <DeletePlayerModal ref="deletePlayerModalRef" :playerId="selectedPlayerId" @event-player-deleted="handlePlayerDeleted" />
-
-
     </div>
   </div>
 </template>

@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <PlayerDetailsModal ref="playerDetailsModalRef"/>
+    <DeletePlayerModal ref="deletePlayerModalRef"/>
     <div class="row">
       <div class="col-10 mx-auto">
 
@@ -56,10 +57,11 @@
 <script>
 import router from "@/router";
 import PlayerDetailsModal from "@/components/modal/PlayerDetailsModal.vue";
+import DeletePlayerModal from "@/components/modal/DeletePlayerModal.vue";
 
 export default {
   name: "PlayersTable",
-  components: {PlayerDetailsModal},
+  components: {DeletePlayerModal, PlayerDetailsModal},
 
 
   data() {
@@ -118,7 +120,7 @@ export default {
     },
 
     openDeleteInfoModal(playerId) {
-      this.$refs.deletePlayerModalRef.$refs.modalRef.openModal();
+      this.$refs.deletePlayerModalRef.$refs.modalRef.openModal()
     },
   },
 
