@@ -2,8 +2,8 @@
 
   <Modal ref="modalRef">
     <template #title>
-      <span v-if="playerId !== 0" >Add Player</span>
-      <span v-else>Edit Player</span>
+      <span v-if="playerId === 0" >Edit Player</span>
+      <span v-else>Add Player</span>
       <!--      todo: if playerId is 0 -> Add player, else -> player Name-->
 
     </template>
@@ -68,8 +68,8 @@
     </template>
     <template #buttons>
       <button @click="executeAddPlayer" type="button" class="btn btn-danger">
-        <span v-if="playerId === 0">Add Player</span>
-        <span v-else>Update Player</span>
+        <span v-if="playerId === 0">Update Player</span>
+        <span v-else>Add Player</span>
       </button>
 
       <!--v-if-->
