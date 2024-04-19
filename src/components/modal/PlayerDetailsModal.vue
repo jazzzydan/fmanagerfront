@@ -2,7 +2,8 @@
 
   <Modal ref="modalRef">
     <template #title>
-    <!--v-if -->
+      <button v-if="playerId === 0">Add Player</button>
+      <button v-else>Edit Player</button>
       <!--      todo: if playerId is 0 -> Add player, else -> player Name-->
 
     </template>
@@ -66,7 +67,10 @@
       </div>
     </template>
     <template #buttons>
-      <button @click="executeAddPlayer" type="button" class="btn btn-danger">Add player</button>
+      <button @click="executeAddPlayer" type="button" class="btn btn-danger">
+        <span v-if="playerId === 0">Add Player</span>
+        <span v-else>Update Player</span>
+      </button>
 
       <!--v-if-->
       <!--      todo: if playerId is 0 -> Add player: POST, else -> Update: PUT-->
@@ -101,6 +105,10 @@ export default {
     }
   },
   methods: {
+    openModal(){
+      this.$refs.modalRef.openModal()
+    },
+
     executeAddPlayer() {
       if (this.playerNameInputConfirmed()) {
         this.sendAddPlayerRequest()
@@ -121,8 +129,8 @@ export default {
     resetMessage() {
       this.message = ''
     },
-    sendAdd() {
-      this.$http.post("/player", this.somePayloadDtoObject
+    sendAddPlayerRequest() {
+      this.$http.post("/players/player", this.playerDetails
       ).then(response => {
         const responseJSON = response.data
       }).catch(error => {
@@ -131,9 +139,7 @@ export default {
     },
 
   },
-  mounted() {
 
-  }
 }
 </script>
 

@@ -116,7 +116,7 @@ export default {
     resetMessage() {
       this.message = ''
     },
-    sendAdd() {
+    sendAddPlayerRequest() {
       this.$http.post("/player", this.somePayloadDtoObject
       ).then(response => {
         const responseJSON = response.data

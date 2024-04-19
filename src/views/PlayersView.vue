@@ -24,14 +24,12 @@
         </div>
       </div>
   <div class="row">
-
     <div class="col">
-
       <div class="d-grid gap-2 col-5 mx-auto">
-        <AddPlayerModal ref="addPlayerModalRef"/>
-        <button @click="openAddPlayerModal" class="btn btn-primary" type="button">Add Player</button>
-        <br>
-    </div>
+        <button @click="openPlayerDetailsModal" class="btn btn-primary" type="button">
+          Add Player</button>
+        <PlayerDetailsModal ref="playerDetailsModalRef"/>
+            </div>
     </div>
   </div>
 
@@ -54,21 +52,13 @@ import ClubDropdown from "@/components/dropdown/ClubDropdown.vue";
 import CountryDropdown from "@/components/dropdown/CountryDropdown.vue";
 import LeagueDropdown from "@/components/dropdown/LeagueDropdown.vue";
 import PlayerSearchInput from "@/components/input/PlayerSearchInput.vue";
-import router from "@/router";
 import PlayerDetailsModal from "@/components/modal/PlayerDetailsModal.vue";
-import AddPlayerModal from "@/components/modal/AddPlayerModal.vue";
-import AddPlayersModal from "@/components/modal/AddPlayerModal.vue";
+import router from "@/router";
 
 export default {
   name: "PlayersView",
-  computed: {
-    AddPlayerModal() {
-      return AddPlayerModal
-    }
-  },
+
   components: {
-    AddPlayerModal,
-    AddPlayersModal,
     PlayerDetailsModal,
     LeagueDropdown,
     ClubDropdown,
@@ -82,6 +72,7 @@ export default {
     return {
       errorMessage: '',
       successMessage: '',
+      playerId:0,
 
       playersRequest: {
         confederationId: 0,
@@ -130,10 +121,18 @@ export default {
       this.playersRequest.clubId = 0
       this.playersRequest.playerName = ''
     },
-    openAddPlayerModal() {
-      this.$refs.addPlayerModalRef.$refs.modalRef.openModal()
+      openPlayerDetailsModal(playerId = 0) {
+        if (playerId) {
+          // Edit mode: Pass player ID to modal to load player data for editing
+          this.$refs.playerDetailsModalRef.openModal(playerId);
+        } else {
+          // Add mode: Open modal for adding a new player
+          this.$refs.playerDetailsModalRef.openModal();
+        }
+      }
+
     },
   }
-}
+
 
 </script>
