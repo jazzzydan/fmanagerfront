@@ -1,7 +1,6 @@
 <template>
   <select v-model="selectedLeagueId"
           @change="emitSelectedLeagueId"
-          ref="emitSelectedClubId"
           class="form-select">
     <option selected value="0">All leagues</option>
     <option v-for="league in leagues" :value="league.leagueId" :key="league.leagueId">

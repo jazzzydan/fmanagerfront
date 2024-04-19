@@ -7,7 +7,7 @@
           <table class="table table-success table-hover rounded-table">
             <thead>
             <tr>
-              <th scope="col" style="text-align: left;">Players name</th>
+              <th scope="col" style="text-align: left; padding-left: 1em;">Players name</th>
               <th scope="col">Nationality</th>
               <th scope="col">Birth date</th>
               <th scope="col">Height</th>
@@ -19,9 +19,9 @@
             </thead>
             <tbody>
             <tr v-for="player in players" :key="player.playerId">
-              <td style="text-align: left;">
+              <td style="text-align: left; padding-left: 1em;">
                 <div @click="handlePlayerClick(player.playerId)">
-                  {{ player.playerName }}
+                  <a href="#"> {{ player.playerName }} </a>
                 </div>
               </td>
               <td>{{ player.nationality }}</td>

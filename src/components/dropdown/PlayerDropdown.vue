@@ -1,7 +1,6 @@
 <template>
   <select v-model="selectedPlayerId"
           @change="emitSelectedPlayerId"
-          ref="playerDropdownRef"
           class="form-select">
     <option selected value="0">Players</option>
     <option v-for="player in players" :value="player.playerId" :key="player.playerId">
@@ -31,7 +30,7 @@ export default {
   },
   methods: {
     sendGetPlayersRequest() {
-      this.$http.get(`/players/${this.selectedPlayerId}`)
+      this.$http.get('/players/all')
           .then(response => {
             this.players = response.data
           })
@@ -39,10 +38,12 @@ export default {
             router.push({name: 'errorRoute'})
           })
     },
+
     getSelectedPlayerId(playerId) {
       this.selectedPlayerId = playerId
       this.sendGetPlayersRequest()
     },
+
     emitSelectedPlayerId() {
       this.$emit('event-selected-player-change' ,this.selectedPlayerId);
     }

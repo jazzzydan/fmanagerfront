@@ -1,7 +1,6 @@
 <template>
   <select v-model="selectedCountryId"
           @change="emitSelectedCountryId"
-          ref="countryDropdownRef"
           class="form-select">
     <option selected value="0">All countries</option>
     <option v-for="country in countries" :value="country.countryId" :key="country.countryId">

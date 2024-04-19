@@ -1,15 +1,21 @@
 <template>
   <div class="container">
+    <div class="row">
+      <div class="col-10 mx-auto">
+        <table class="table table-success table-hover rounded-table">
+          <thead><tr class="align-content-md-center">
+            <th scope="col">players name</th>
+          </tr></thead>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="container">
     <PlayerObservationModal ref="playerObservationModalRef"/>
     <div class="row">
       <div class="col-10 mx-auto">
-
           <table class="table table-success table-hover rounded-table">
             <thead>
-
-<!--            todo: mangija nime kuvamine korda teha-->
-
-            <tr><h3>Players name</h3></tr>
             <tr>
               <th scope="col">Observation date</th>
               <th scope="col">Home team</th>
@@ -49,8 +55,9 @@ export default {
   data() {
     return {
       selectedPlayerId: 0,
+      selectedPlayerName: '',
 
-      // todo: otsime mille jargi: userId (vastava scout'i vaatlused), playerId
+      // todo: otsime mille jargi: POST {userId (vastava scout'i vaatlused), playerId}
 
       playerObservations: [
         {
@@ -105,7 +112,7 @@ export default {
   },
 
   beforeMount() {
-    // this.sendGetObservationsRequest()
+    // this.updateObservationsTable()
   }
 
 }

@@ -1,5 +1,5 @@
-<template>
 
+<template>
   <div class="container text-center">
     <PlayerObservationModal ref="playerObservationModalRef"/>
     <StatisticsModal ref="statisticsModalRef"/>
@@ -9,14 +9,13 @@
     </div>
     <div class="row">
       <div class="col">
-        <PlayerDropdown ref="playerDropdownRef"
-        @event-selected-player-change="forwardPlayerId"/>
+        <PlayerDropdown ref="playerDropdownRef" @event-selected-player-change="forwardPlayerId"/>
       </div>
       <div class="col">
         <PlayerSearchInput @event-player-search-name-enter="searchPlayer"/>
       </div>
       <div class="col">
-        <button @click="openPlayerObservationModal" class="btn btn-success" type="button">Add new observation</button>
+        <button @click="openPlayerObservationModal" class="btn btn-primary custom-button" type="button">Add new observation</button>
       </div>
     </div>
     <div class="row">
@@ -24,24 +23,21 @@
     </div>
     <div class="row">
       <div class="col">
-        Next game button
+        <button @click="" class="btn btn-success custom-button" type="button">Next game</button>
       </div>
       <div class="col">
-        <button @click="openPlayerObservationModal" class="btn btn-success" type="button">New observation</button>
-<!--        todo: kas saata uuele lehele voi teha uus modal-->
+        <button @click="openPlayerObservationModal" class="btn btn-success custom-button" type="button">New observation</button>
       </div>
       <div class="col">
-        <button @click="openStatisticsModal" class="btn btn-success" type="button">Statistics</button>
+        <button @click="openStatisticsModal" class="btn btn-success custom-button" type="button">Statistics</button>
       </div>
     </div>
   </div>
-
 </template>
 
 
 <script>
 import PlayerDropdown from "@/components/dropdown/PlayerDropdown.vue";
-import ConfederationDropdown from "@/components/dropdown/ConfederationDropdown.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import PlayerObservationModal from "@/components/modal/PlayerObservationModal.vue";
@@ -54,7 +50,11 @@ export default {
   components: {
     ObservationsTable,
     PlayerSearchInput,
-    StatisticsModal, PlayerObservationModal, AlertSuccess, AlertDanger, ConfederationDropdown, PlayerDropdown},
+    StatisticsModal,
+    PlayerObservationModal,
+    AlertSuccess,
+    AlertDanger,
+    PlayerDropdown},
   props: {
     // URL + path variable
     playerId: String
@@ -70,7 +70,11 @@ export default {
   },
   methods: {
     forwardPlayerId() {
-      this.selectedPlayerId = this.playerId
+      if (this.playerId === '') {
+        this.selectedPlayerId = 0
+      } else {
+        this.selectedPlayerId = this.playerId
+      }
       this.$refs.playerDropdownRef.getSelectedPlayerId(this.selectedPlayerId)
     },
 
@@ -107,3 +111,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.custom-button {
+  width: 100%;
+}
+</style>
