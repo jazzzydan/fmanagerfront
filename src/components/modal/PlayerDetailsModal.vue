@@ -2,8 +2,8 @@
 
   <Modal ref="modalRef">
     <template #title>
-      <button v-if="playerId === 0">Add Player</button>
-      <button v-else>Edit Player</button>
+      <span v-if="playerId !== 0" >Add Player</span>
+      <span v-else>Edit Player</span>
       <!--      todo: if playerId is 0 -> Add player, else -> player Name-->
 
     </template>
@@ -105,9 +105,11 @@ export default {
     }
   },
   methods: {
-    openModal(){
-      this.$refs.modalRef.openModal()
+    openModal(playerId = 0){
+      this.playerId = playerId;
+      this.$refs.modalRef.openModal();
     },
+
 
     executeAddPlayer() {
       if (this.playerNameInputConfirmed()) {
