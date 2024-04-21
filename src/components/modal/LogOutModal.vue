@@ -1,7 +1,7 @@
 <template>
   <Modal ref="modalRef">'
     <template #title>
-      Log out?
+      Log out
     </template>
     <template #body>
       <div class="m-4">

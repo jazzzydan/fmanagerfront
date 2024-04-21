@@ -2,7 +2,7 @@
   <div class="container">
     <Modal ref="modalRef">
       <template #body>
-        Delete player name X
+        Delete player name {{ playersRequest.playerId }}
       </template>
       <template #buttons>
         <button @click="sendDeletePlayerRequest" type="button" class="btn btn-danger">Delete player</button>
@@ -16,12 +16,15 @@
 
 import router from "@/router";
 import Modal from "@/components/modal/Modal.vue";
-import axios from "axios";
 
 
 export default {
   name: 'DeletePlayerModal',
-  components: {Modal}, // // ... missing Info?
+  components: {Modal},
+  props: {
+    playersRequest: {}
+  },
+
   data() {
     return {
       playerId: 0,
@@ -29,19 +32,23 @@ export default {
   },
 
   methods: {
-    async sendDeletePlayerRequest() {
-      // console.log("delete player")
-      try {
-        await axios.delete(`/players/${this.playerId}`);
-        this.$emit('event-player-deleted', this.playerId);
-      } catch (error) {
-        router.push({name: 'errorRoute'});
-      }
-    }
+    sendDeletePlayerRequest() {
+      this.$http.delete(`/players/${this.playerId}`)
+          .then(() => {
+            // saada mängijate info muutus, re-load player table (Smthing like: this.$emit('event-alert-location-deleted', this.atmLocationInfo.locationName) )
+            this.$refs.modalRef.closeModal()
+          })
+          .catch(error => {
+            router.push({name: 'errorRoute'});
+          })
+    },
   }
-
 }
-
-
 </script>
+
+
+
+
+
+
 
