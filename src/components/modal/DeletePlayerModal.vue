@@ -2,7 +2,7 @@
   <div class="container">
     <Modal ref="modalRef">
       <template #body>
-        Delete player: {{ playersRequest.playerName }}
+        Do you want to delete player: <b> {{ playersRequest.playerName }} </b> ?
       </template>
       <template #buttons>
         <button @click="sendDeletePlayerRequest" type="button" class="btn btn-danger">Delete player</button>
