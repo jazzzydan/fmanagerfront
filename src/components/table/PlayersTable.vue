@@ -43,7 +43,7 @@
                                  :icon="['far', 'pen-to-square']"/>
             </td>
             <td>
-              <font-awesome-icon @click="openDeleteInfoModal" class="link-danger cursor-pointer"
+              <font-awesome-icon @click="openDeleteInfoModal(player.playerName)" class="link-danger cursor-pointer"
                                  :icon="['far', 'trash-can']"/>
             </td>
           </tr>
@@ -120,8 +120,8 @@ export default {
 
     },
 
-    openDeleteInfoModal(playerId) {
-      this.playersRequest.playerId = playerId;
+    openDeleteInfoModal(playerName) {
+      this.playersRequest.playerName = playerName
       this.$refs.deletePlayerModalRef.$refs.modalRef.openModal()
     },
   },

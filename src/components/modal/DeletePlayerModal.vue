@@ -2,7 +2,7 @@
   <div class="container">
     <Modal ref="modalRef">
       <template #body>
-        Delete player name {{ playersRequest.playerId }}
+        Delete player: {{ playersRequest.playerName }}
       </template>
       <template #buttons>
         <button @click="sendDeletePlayerRequest" type="button" class="btn btn-danger">Delete player</button>
