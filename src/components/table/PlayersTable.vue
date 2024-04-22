@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <PlayerDetailsModal ref="playerDetailsModalRef"/>
-    <DeletePlayerModal ref="deletePlayerModalRef" :playersRequest="playersRequest"/>
+    <DeletePlayerModal ref="deletePlayerModalRef" :selected-player="selectedPlayer"/>
 
     <div class="row">
       <div class="col-10 mx-auto">
@@ -43,7 +43,7 @@
                                  :icon="['far', 'pen-to-square']"/>
             </td>
             <td>
-              <font-awesome-icon @click="openDeleteInfoModal(player.playerName)" class="link-danger cursor-pointer"
+              <font-awesome-icon @click="openDeletePlayerModal(player.playerId, player.playerName)" class="link-danger cursor-pointer"
                                  :icon="['far', 'trash-can']"/>
             </td>
           </tr>
@@ -88,7 +88,11 @@ export default {
           weight: 0,
           observationExists: false
         }
-      ]
+      ],
+      selectedPlayer: {
+        playerName: '',
+        playerId: ''
+      },
     }
   },
 
@@ -120,8 +124,9 @@ export default {
 
     },
 
-    openDeleteInfoModal(playerName) {
-      this.playersRequest.playerName = playerName
+    openDeletePlayerModal(playerId, playerName) {
+      this.selectedPlayer.playerId = playerId
+      this.selectedPlayer.playerName = playerName
       this.$refs.deletePlayerModalRef.$refs.modalRef.openModal()
     },
   },

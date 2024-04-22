@@ -2,10 +2,10 @@
   <div class="container">
     <Modal ref="modalRef">
       <template #body>
-        Do you want to delete player: <b> {{ playersRequest.playerName }} </b> ?
+        Do you want to delete player: <b> {{ selectedPlayer.playerName }} </b> ?
       </template>
       <template #buttons>
-        <button @click="sendDeletePlayerRequest" type="button" class="btn btn-danger">Delete player</button>
+        <button @click="deletePlayer" type="button" class="btn btn-success">Delete player</button>
       </template>
     </Modal>
   </div>
@@ -16,33 +16,42 @@
 
 import router from "@/router";
 import Modal from "@/components/modal/Modal.vue";
+import playersTable from "@/components/table/PlayersTable.vue";
 
 
 export default {
   name: 'DeletePlayerModal',
   components: {Modal},
   props: {
-    playersRequest: {}
+    selectedPlayer: {}
   },
 
   data() {
     return {
-      playerId: 0,
+
+      playerName: '',
+      playerId: ''
+
     }
   },
 
   methods: {
     sendDeletePlayerRequest() {
-      this.$http.delete(`/players/${this.playerId}`)
+      this.$http.delete(`/players/${this.playerId}`) // ?????????
           .then(() => {
-            // saada mängijate info muutus, re-load player table (Smthing like: this.$emit('event-alert-location-deleted', this.atmLocationInfo.locationName) )
             this.$refs.modalRef.closeModal()
           })
           .catch(error => {
             router.push({name: 'errorRoute'});
           })
     },
+
+    deletePlayer() {
+      this.playerId = this.selectedPlayer.playerId
+      this.sendDeletePlayerRequest()
+    }
   }
+
 }
 </script>
 
