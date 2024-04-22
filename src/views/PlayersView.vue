@@ -73,7 +73,6 @@ export default {
 
     }
   },
-
   methods: {
     setConfederationId(selectedConfederationId) {
       this.playersRequest.confederationId = selectedConfederationId
@@ -105,30 +104,22 @@ export default {
     },
 
     searchPlayer(playerName) {
+      this.updatePlayersRequest(playerName)
+      this.$refs.playersTableRef.updatePlayersTable(this.playersRequest)
+      this.playersRequest.playerName = ''
+    },
+
+    updatePlayersRequest(playerName) {
       this.playersRequest.playerName = playerName
       this.playersRequest.confederationId = 0
       this.playersRequest.countryId = 0
       this.playersRequest.leagueId = 0
       this.playersRequest.clubId = 0
-      this.handleDropdownChange()
-    },
-    handlePlayerDeleted(playerId) {
-      // Handle the player deleted event if needed.
-      // Respond to the event emitted when a player is successfully deleted.
+
+      // todo: update dropdowns to comply with id = 0
     },
 
-    // openDeleteInfoModal(playerId) {
-    //   // Check if the component has been mounted
-    //   if (this.$refs.deletePlayerModalRef) {
-    //     // Access the $refs property if it exists
-    //     this.$refs.deletePlayerModalRef.$refs.modalRef.openModal();
-    //   } else {
-    //     // Handle the case when the component has not been mounted
-    //     console.error('DeletePlayerModal component has not been mounted yet');
-    //   }
-    },
-
-
+  },
 
 }
 

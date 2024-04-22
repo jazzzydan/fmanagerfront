@@ -1,7 +1,6 @@
 <template>
   <select v-model="selectedClubId"
           @change="emitSelectedClubId"
-          ref="clubDropdownRef"
           class="form-select">
     <option selected value="0">All clubs</option>
     <option v-for="club in clubs" :value="club.clubId" :key="club.clubId">
