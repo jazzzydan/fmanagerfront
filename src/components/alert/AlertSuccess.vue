@@ -1,5 +1,5 @@
 <template>
-  <div v-if="message.length > 0" class="alert alert-success text-center" role="alert">
+  <div v-if="message.length > 0" class="alert alert-primary text-center" role="alert">
     {{ message }}
   </div>
 </template>

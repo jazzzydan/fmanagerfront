@@ -112,11 +112,11 @@ export default {
       this.sendGetPlayersRequest()
     },
 
-    handlePlayerClick(playerId) {
+    handlePlayerClick(clickedPlayerId) {
       // URL + query/request parameter example
       // router.push({name: 'locationRoute', query: {locationId: locationId}})
       // URL + path variable
-      router.push({name: 'observationsRoute', params: {playerId: playerId}})
+      router.push({name: 'observationsRoute', query: {playerId: clickedPlayerId}})
     },
 
     openPlayerDetailsModal(playerId) {
