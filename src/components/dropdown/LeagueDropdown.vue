@@ -35,6 +35,9 @@ export default {
             router.push({name: 'errorRoute'})
           })
     },
+    reset() {
+      this.selectedLeagueId = 0;
+    },
 
     getSelectedCountryId(countryId) {
       this.selectedCountryId = countryId

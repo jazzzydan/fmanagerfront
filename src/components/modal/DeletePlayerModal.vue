@@ -36,19 +36,19 @@ export default {
   },
 
   methods: {
+    deletePlayer() {
+      this.playerId = this.selectedPlayer.playerId
+      this.sendDeletePlayerRequest()
+    },
+
     sendDeletePlayerRequest() {
-      this.$http.delete(`/players/${this.playerId}`) // ?????????
+      this.$http.delete(`/player/${this.playerId}`)
           .then(() => {
             this.$refs.modalRef.closeModal()
           })
           .catch(error => {
             router.push({name: 'errorRoute'});
           })
-    },
-
-    deletePlayer() {
-      this.playerId = this.selectedPlayer.playerId
-      this.sendDeletePlayerRequest()
     }
   }
 

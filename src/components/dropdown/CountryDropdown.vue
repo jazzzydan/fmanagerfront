@@ -36,6 +36,9 @@ export default {
             router.push({name: 'errorRoute'})
           })
     },
+    reset() {
+      this.selectedCountryId = 0;
+    },
 
     getSelectedConfederationId(confederationId) {
       this.selectedConfederationId = confederationId

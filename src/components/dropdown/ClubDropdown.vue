@@ -38,10 +38,15 @@ export default {
             router.push({name: 'errorRoute'})
           })
     },
+    reset() {
+      this.selectedClubId = 0;
+    },
+
     getSelectedLeagueId(leagueId) {
       this.selectedLeagueId = leagueId
       this.sendGetClubsRequest()
     },
+
     emitSelectedClubId() {
       this.$emit('event-selected-club-change' ,this.selectedClubId);
     }

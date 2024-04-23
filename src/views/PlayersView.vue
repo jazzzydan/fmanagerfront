@@ -78,7 +78,6 @@ export default {
       this.playersRequest.confederationId = selectedConfederationId
       this.$refs.countryDropdownRef.getSelectedConfederationId(selectedConfederationId)
       this.handleDropdownChange()
-
     },
 
     setCountryId(selectedCountryId) {
@@ -119,7 +118,22 @@ export default {
       // todo: update dropdowns to comply with id = 0
     },
 
+    resetDropdowns() {
+      this.playersRequest.confederationId = 0;
+      this.playersRequest.countryId = 0;
+      this.playersRequest.leagueId = 0;
+      this.playersRequest.clubId = 0;
+      this.$refs.confederationDropdownRef.reset()
+      this.$refs.countryDropdownRef.reset()
+      this.$refs.leagueDropdownRef.reset()
+      this.$refs.clubDropdownRef.reset()
+    },
+
   },
+
+// mounted() {
+//   this.resetDropdowns()
+// }
 
 }
 

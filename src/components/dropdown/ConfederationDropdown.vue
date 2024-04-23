@@ -35,6 +35,9 @@ export default {
             router.push({name: 'errorRoute'})
           })
     },
+    reset() {
+      this.selectedConfederationId = 0;
+    },
 
     emitSelectedConfederationId() {
       this.$emit('event-selected-confederation-change', this.selectedConfederationId)
