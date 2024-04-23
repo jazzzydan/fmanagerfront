@@ -9,7 +9,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <PlayerDropdown ref="playerDropdownRef" @event-selected-player-change="forwardPlayerId"/>
+        <PlayerDropdown ref="playerDropdownRef" @event-selected-player-change="updatePlayerId"/>
       </div>
       <div class="col">
         <PlayerSearchInput @event-player-search-name-enter="searchPlayer"/>
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="row">
-      <ObservationsTable/>
+      <ObservationsTable ref="observationsTableRef"/>
     </div>
     <div class="row">
       <div class="col">
@@ -44,6 +44,7 @@ import PlayerObservationModal from "@/components/modal/PlayerObservationModal.vu
 import StatisticsModal from "@/components/modal/StatisticsModal.vue";
 import PlayerSearchInput from "@/components/input/PlayerSearchInput.vue";
 import ObservationsTable from "@/components/table/ObservationsTable.vue";
+import {useRoute} from "vue-router";
 
 export default {
   name: "ObservationsView",
@@ -55,27 +56,29 @@ export default {
     AlertSuccess,
     AlertDanger,
     PlayerDropdown},
-  props: {
-    // URL + path variable
-    playerId: String
-  },
 
   data() {
     return {
-      selectedPlayerId: 0,
+      selectedPlayerId: Number(useRoute().query.playerId),
       errorMessage: '',
-      successMessage: '',
+      successMessage: ''
 
     }
   },
   methods: {
     forwardPlayerId() {
-      if (this.playerId === '') {
+      if (isNaN(this.selectedPlayerId)) {
         this.selectedPlayerId = 0
-      } else {
-        this.selectedPlayerId = this.playerId
       }
-      this.$refs.playerDropdownRef.getSelectedPlayerId(this.selectedPlayerId)
+      this.$refs.observationsTableRef.selectedPlayerId = this.selectedPlayerId
+      this.$refs.observationsTableRef.updateObservationsTable()
+      this.$refs.playerDropdownRef.selectedPlayerId = this.selectedPlayerId
+    },
+
+    updatePlayerId(playerId) {
+      this.selectedPlayerId = playerId
+      this.$refs.observationsTableRef.selectedPlayerId = this.selectedPlayerId
+      this.$refs.observationsTableRef.updateObservationsTable()
     },
 
     searchPlayer(playerName) {

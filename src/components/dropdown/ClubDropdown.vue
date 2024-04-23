@@ -2,7 +2,7 @@
   <select v-model="selectedClubId"
           @change="emitSelectedClubId"
           class="form-select">
-    <option selected value="0">All clubs</option>
+    <option selected value="0">Clubs</option>
     <option v-for="club in clubs" :value="club.clubId" :key="club.clubId">
       {{club.clubName}}
     </option>

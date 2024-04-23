@@ -2,7 +2,7 @@
   <select v-model="selectedCountryId"
           @change="emitSelectedCountryId"
           class="form-select">
-    <option selected value="0">All countries</option>
+    <option selected value="0">Countries</option>
     <option v-for="country in countries" :value="country.countryId" :key="country.countryId">
       {{ country.countryName }}
     </option>

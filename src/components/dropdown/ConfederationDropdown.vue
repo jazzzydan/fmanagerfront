@@ -2,7 +2,7 @@
   <select v-model="selectedConfederationId"
           @change="emitSelectedConfederationId"
           class="form-select">
-    <option selected value="0">All confederations</option>
+    <option selected value="0">Confederations</option>
     <option v-for="confederation in confederations" :value="confederation.confederationId" :key="confederation.confederationId">
       {{confederation.confederationName}}</option>
   </select>
