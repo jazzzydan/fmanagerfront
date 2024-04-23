@@ -2,75 +2,80 @@
 
   <Modal ref="modalRef">
     <template #title>
-      <span v-if="playerId === 0" >Edit Player</span>
-      <span v-else>Add Player</span>
+      <span v-if="playerId === 0">Add player</span>
+      <span v-else>Edit player: {{ this.playerName }}</span>
       <!--      todo: if playerId is 0 -> Add player, else -> player Name-->
 
     </template>
     <template #body>
+      <AlertDanger :message="errorMessage"/>
+      <AlertSuccess :message="successMessage"/>
       <div class="container text-end">
-      <div class="row mb-3">
-        <div class="col align-content-md-center">Name:</div>
-        <div class="col">
-          <input type="text" class="form-control">
+        <div class="row mb-3">
+          <div class="col align-content-md-center">Name:</div>
+          <div class="col">
+            <input v-model="playerDetails.playerName" type="text" class="form-control">
+          </div>
         </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col align-content-md-center">Club:</div>
-        <div class="col">
-          <ClubDropdown/>
+        <div class="row mb-3">
+          <div class="col align-content-md-center">Club:</div>
+          <div class="col">
+            <ClubDropdown v-model="playerDetails.clubId"/>
+          </div>
         </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col align-content-md-center">Gender:</div>
-        <div class="col">
-          <select v-model="playerDetails.gender" class="form-select" aria-label="Default select example">
-            <option value="M">Male</option>
-            <option value="F">Female</option>
-          </select>
+        <div class="row mb-3">
+          <div class="col align-content-md-center">Gender:</div>
+          <div class="col">
+            <select v-model="playerDetails.gender" class="form-select" aria-label="Default select example">
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </select>
+          </div>
         </div>
-      </div>
 
-      <div class="row mb-3">
-        <div class="col  align-content-md-center">Date of Birth:</div>
-        <div class="col">
-          <input type="date" class="form-control">
+        <div class="row mb-3">
+          <div class="col  align-content-md-center">Date of Birth:</div>
+          <div class="col">
+            <input v-model="playerDetails.birthDate" type="date" class="form-control">
+          </div>
         </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col align-content-md-center">Height:</div>
-        <div class="col">
-          <input type="number" class="form-control">
+        <div class="row mb-3">
+          <div class="col align-content-md-center">Height:</div>
+          <div class="col">
+            <input v-model="playerDetails.height" type="number" class="form-control">
+          </div>
         </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col align-content-md-center">Weight:</div>
-        <div class="col">
-          <input type="number" class="form-control">
+        <div class="row mb-3">
+          <div class="col align-content-md-center">Weight:</div>
+          <div class="col">
+            <input v-model="playerDetails.weight" type="number" class="form-control">
+          </div>
         </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col align-content-md-center">Nationality:</div>
-        <div class="col">
-          <input type="text" class="form-control" placeholder="EST" maxlength="3">
+        <div class="row mb-3">
+          <div class="col align-content-md-center">Nationality:</div>
+          <div class="col">
+            <input v-model="playerDetails.nationality" type="text" class="form-control" placeholder="EST" maxlength="3">
+          </div>
         </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col align-content-md-center">Best Foot:</div>
-        <div class="col">
-          <select v-model="playerDetails.bestFoot" class="form-select" aria-label="Default select example">
-            <option value="L">Left</option>
-            <option value="R">Right</option>
-          </select>
+        <div class="row mb-3">
+          <div class="col align-content-md-center">Best Foot:</div>
+          <div class="col">
+            <select v-model="playerDetails.bestFoot" class="form-select" aria-label="Default select example">
+              <option value="L">Left</option>
+              <option value="R">Right</option>
+            </select>
+          </div>
         </div>
-      </div>
       </div>
     </template>
     <template #buttons>
-      <button @click="executeAddPlayer" type="button" class="btn btn-danger">
-        <span v-if="playerId === 0">Update Player</span>
-        <span v-else>Add Player</span>
-      </button>
+      <div v-if="playerId === 0">
+        <button @click="addNewPlayer" type="submit" class="btn btn-success">Add player</button>
+      </div>
+      <div v-else>
+        <button @click="editPlayer" type="submit" class="btn btn-success">Edit player</button>
+      </div>
+
 
       <!--v-if-->
       <!--      todo: if playerId is 0 -> Add player: POST, else -> Update: PUT-->
@@ -83,18 +88,23 @@
 <script>
 import Modal from "@/components/modal/Modal.vue";
 import ClubDropdown from "@/components/dropdown/ClubDropdown.vue";
+import AlertDanger from "@/components/alert/AlertDanger.vue";
+import AlertSuccess from "@/components/alert/AlertSuccess.vue";
+import router from "@/router";
 
 export default {
   name: "PlayerDetailsModal",
-  components: {ClubDropdown, Modal},
+  components: {AlertSuccess, AlertDanger, ClubDropdown, Modal},
   data() {
     return {
+      successMessage: '',
+      errorMessage: '',
       playerId: 0,
-      playerNameConfirmation: '',
+      playerName: '',
 
       playerDetails: {
         playerName: '',
-        clubName: 0,
+        clubId: '',
         gender: 'M',
         birthDate: '',
         height: 0,
@@ -105,43 +115,70 @@ export default {
     }
   },
   methods: {
-    openModal(playerId = 0){
+    openPlayerDetailsModal(playerId, playerName) {
       this.playerId = playerId;
       this.$refs.modalRef.openModal();
     },
 
+    addNewPlayer() {
+      if (this.allFieldsWithCorrectInput()) {
+        this.sendPostPlayerRequest()
+        this.handlePostPlayerResponse()
+      } else {
+        this.errorMessage = 'täida kõik väljad'
+        setTimeout(this.resetMessage, 3000)
+      }
+    },
 
-    executeAddPlayer() {
-      if (this.playerNameInputConfirmed()) {
-        this.sendAddPlayerRequest()
-      } else (this.allFieldsHaveInput())
-      {
-        this.displayPlayerNameEqualityAlert()
+    allFieldsWithCorrectInput() {
+      return this.playerDetails.playerName !== '' &&
+          this.playerDetails.gender !== '' &&
+          this.playerDetails.birthDate !== '' &&
+          this.playerDetails.height !== 0 &&
+          this.playerDetails.weight !== 0 &&
+          this.playerDetails.nationality !== '' &&
+          this.playerDetails.bestFoot !== ''
+    },
+
+    sendPostPlayerRequest() {
+      this.$http.post("/player", this.playerDetails)
+          .then(() => this.handlePostPlayerResponse())
+          .catch(error => {
+            this.errorResponse = error.response.data
+            this.handleError()
+          })
+    },
+
+    handlePostPlayerResponse() {
+      this.successMessage = 'Uus mängija "' + this.playerDetails.playerName + '" lisatud süsteemi'
+      setTimeout(this.$refs.modalRef.closeModal, 3000)
+      setTimeout(this.resetMessage, 3000)
+    },
+
+    handleError() {
+      this.handleSomethingWentWrongError()
+      this.handlePlayerNameNotAvailableError()
+    },
+
+    handlePlayerNameNotAvailableError() {
+      if (this.errorResponse.errorCode === 333) {
+        this.errorMessage = this.errorResponse.message
+        setTimeout(this.resetMessage, 3000)
       }
     },
-    playerNameInputConfirmed() {
-      if (this.playerName === this.playerNameConfirmation) {
-        return true
+
+    handleSomethingWentWrongError() {
+      if (this.errorResponse.errorCode !== 333) {
+        router.push({name: 'errorRoute'})
       }
     },
-    displayPlayerNameEqualityAlert() {
-      this.message = "PlayerName is not identical";
-      setTimeout(this.resetMessage, 4000);
-    },
+
     resetMessage() {
-      this.message = ''
-    },
-    sendAddPlayerRequest() {
-      this.$http.post("/players/player", this.playerDetails
-      ).then(response => {
-        const responseJSON = response.data
-      }).catch(error => {
-        const errorResponseJSON = error.response.data
-      })
+      this.successMessage = ''
+      this.errorMessage = ''
     },
 
-  },
-
+  }
 }
 </script>
 

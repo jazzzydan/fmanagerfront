@@ -37,7 +37,7 @@
                 </div>
               </td>
               <td>
-                <font-awesome-icon @click="openPlayerDetailsModal(player.playerId)" class="link-success cursor-pointer"
+                <font-awesome-icon @click="openPlayerDetailsModal(player.playerId, player.playerName)" class="link-success cursor-pointer"
                                    :icon="['far', 'pen-to-square']"/>
               </td>
               <td>
@@ -111,8 +111,8 @@ export default {
       router.push({name: 'observationsRoute', params: {playerId: playerId}})
     },
 
-    openPlayerDetailsModal(playerId) {
-      this.$refs.playerDetailsModalRef.$refs.modalRef.openModal()
+    openPlayerDetailsModal(playerId, playerName) {
+      this.$refs.playerDetailsModalRef.openPlayerDetailsModal(playerId, playerName)
 
     },
 

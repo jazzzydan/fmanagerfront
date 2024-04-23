@@ -3,6 +3,7 @@
   <div class="container text-center">
     <div class="row">
       <div class="col">
+
         <ConfederationDropdown ref="confederationDropdownRef"
                                @event-selected-confederation-change="setConfederationId"/>
       </div>
@@ -19,29 +20,29 @@
                       @event-selected-club-change="setClubId"/>
       </div>
       <div class="col">
-        <PlayerSearchInput @event-player-search-name-enter = "searchPlayer"/>
-          </div>
-        </div>
+        <PlayerSearchInput @event-player-search-name-enter="searchPlayer"/>
       </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col">
-      <div class="d-grid gap-2 col-5 mx-auto">
-        <button @click="openPlayerDetailsModal" class="btn btn-primary" type="button">
-          Add Player</button>
+      <div class="d-grid col-5 mx-auto m-3">
+        <button @click="openPlayerDetailsModal(this.playerId, '')" class="btn btn-primary" type="button">
+          Add Player
+        </button>
         <PlayerDetailsModal ref="playerDetailsModalRef"/>
-            </div>
+      </div>
     </div>
   </div>
 
 
+  <div class="row">
 
-
-    <div class="row">
-      <!--      todo: Add Players table functionality-->
-      <PlayersTable ref="playersTableRef"/>
-    </div>
-        <div>
-        </div>
+    <!--      todo: Add Players table functionality-->
+    <PlayersTable ref="playersTableRef"/>
+  </div>
+  <div>
+  </div>
 </template>
 
 <script>
@@ -53,7 +54,6 @@ import CountryDropdown from "@/components/dropdown/CountryDropdown.vue";
 import LeagueDropdown from "@/components/dropdown/LeagueDropdown.vue";
 import PlayerSearchInput from "@/components/input/PlayerSearchInput.vue";
 import PlayerDetailsModal from "@/components/modal/PlayerDetailsModal.vue";
-import router from "@/router";
 
 export default {
   name: "PlayersView",
@@ -72,7 +72,7 @@ export default {
     return {
       errorMessage: '',
       successMessage: '',
-      playerId:0,
+      playerId: 0,
 
       playersRequest: {
         confederationId: 0,
@@ -84,6 +84,7 @@ export default {
 
     }
   },
+
   methods: {
     setConfederationId(selectedConfederationId) {
       this.playersRequest.confederationId = selectedConfederationId
@@ -113,6 +114,7 @@ export default {
     handleDropdownChange() {
       this.$refs.playersTableRef.updatePlayersTable(this.playersRequest)
     },
+
     searchPlayer(playerName) {
       this.playersRequest.playerName = playerName
       this.playersRequest.confederationId = 0
@@ -121,18 +123,18 @@ export default {
       this.playersRequest.clubId = 0
       this.playersRequest.playerName = ''
     },
-      openPlayerDetailsModal(playerId = 0) {
-        if (playerId) {
-          // Edit mode: Pass player ID to modal to load player data for editing
-          this.$refs.playerDetailsModalRef.openModal(playerId);
-        } else {
-          // Add mode: Open modal for adding a new player
-          this.$refs.playerDetailsModalRef.openModal();
-        }
-      }
 
-    },
-  }
+    openPlayerDetailsModal(playerId, playerName) {
+      // if (playerId !== 0) {
+      //   // Edit mode: Pass player ID to modal to load player data for editing
+      //   this.$refs.playerDetailsModalRef.openPlayerDetailsModal(playerId);
+      // } else {
+      //   // Add mode: Open modal for adding a new player
+      this.$refs.playerDetailsModalRef.openPlayerDetailsModal(playerId, playerName);
+    }
+  },
+
+}
 
 
 </script>
