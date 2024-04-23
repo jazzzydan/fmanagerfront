@@ -1,8 +1,8 @@
 <template>
   <select v-model="selectedPlayerId"
-          @change="emitSelectedPlayerId"
+          @change="emitSelectedPlayer"
           class="form-select">
-    <option selected value="0">Players</option>
+    <option selected :value="0">Players</option>
     <option v-for="player in players" :value="player.playerId" :key="player.playerId">
       {{player.playerName}}
     </option>
@@ -19,14 +19,8 @@ export default {
   data() {
     return {
       selectedPlayerId: 0,
-      players: [
-        {
-          playerId: 0,
-          playerName: ''
-        }
-      ]
-
-    }
+      players: []
+    };
   },
   methods: {
     sendGetPlayersRequest() {
@@ -39,13 +33,13 @@ export default {
           })
     },
 
-    getSelectedPlayerId(playerId) {
-      this.selectedPlayerId = playerId
-      this.sendGetPlayersRequest()
-    },
+    // getSelectedPlayerId(playerId) {
+    //   this.selectedPlayerId = playerId
+    //   this.sendGetPlayersRequest()
+    // },
 
-    emitSelectedPlayerId() {
-      this.$emit('event-selected-player-change' ,this.selectedPlayerId);
+    emitSelectedPlayer() {
+      this.$emit('event-selected-player-change' ,this.selectedPlayerId)
     }
 
   },
