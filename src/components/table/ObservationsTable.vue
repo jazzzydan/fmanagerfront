@@ -15,9 +15,9 @@
           <tbody>
           <tr v-for="playerObservation in playerObservations" :key="playerObservation.playerObservationId">
             <td>
-              <router-link to="/observations" @click="handleObservationClick(playerObservation.playerObservationId)">
+              <div @click="handleObservationClick(playerObservation.playerObservationId)" class="hyperlink">
                 {{ playerObservation.date }}
-              </router-link>
+              </div>
             </td>
             <td>{{ playerObservation.gameHomeClubName }}</td>
             <td>{{ playerObservation.gameAwayClubName }}</td>
@@ -46,40 +46,21 @@ export default {
       userId: sessionStorage.getItem('userId'),
       selectedPlayerId: 0,
       selectedPlayerName: '',
-
       playerObservations: [
-        // {
-        //   payerObservationId: 0,
-        //   playerName: '',
-        //   gameHomeClubName: '',
-        //   gameAwayClubName: '',
-        //   date: '',
-        //   observationPosition: '',
-        //   comment: '',
-        //   marking: 0,
-        //   setPieces: 0,
-        //   technique: 0,
-        //   heading: 0,
-        //   passing: 0,
-        //   agression: 0,
-        //   decisions: 0,
-        //   teamwork: 0,
-        //   acceleration: 0,
-        //   pace: 0,
-        //   stamina: 0,
-        //   strenght: 0,
-        //   goals: 0,
-        //   assists: 0,
-        //   cards: 0,
-        //   minutes: 0
-        // }
+        {
+          playerObservationId: 0,
+          date: '',
+          gameHomeClubName: '',
+          gameAwayClubName: '',
+          comment: ''
+        }
       ]
     }
   },
   methods: {
 
-    sendGetPlayersRequest() {
-      this.$http.get("/observations",{
+    sendGetObservationsRequest() {
+      this.$http.get("/observations", {
             params: {
               userId: this.userId,
               playerId: this.selectedPlayerId
@@ -95,15 +76,21 @@ export default {
 
     updateObservationsTable() {
       this.userId = Number(sessionStorage.getItem('userId'))
-      this.sendGetPlayersRequest()
+      this.sendGetObservationsRequest()
     },
 
-    handleObservationClick(playerId) {
-      // todo: open PlayerObservationModal
-    },
+    handleObservationClick(playerObservationId) {
+      this.$refs.playerObservationModalRef.handleOpenPlayerObservationModal(playerObservationId)
+    }
 
   }
-
 }
 </script>
 
+<style>
+.hyperlink {
+  color: royalblue; /* Set the text color */
+  text-decoration: underline; /* Add underline */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+</style>
