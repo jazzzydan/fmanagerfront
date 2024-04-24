@@ -20,7 +20,7 @@ export default {
     return {
       selectedPlayerId: 0,
       players: []
-    };
+    }
   },
   methods: {
     sendGetPlayersRequest() {
@@ -32,11 +32,6 @@ export default {
             router.push({name: 'errorRoute'})
           })
     },
-
-    // getSelectedPlayerId(playerId) {
-    //   this.selectedPlayerId = playerId
-    //   this.sendGetPlayersRequest()
-    // },
 
     emitSelectedPlayer() {
       this.$emit('event-selected-player-change' ,this.selectedPlayerId)
