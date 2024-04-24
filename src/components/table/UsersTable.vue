@@ -1,8 +1,9 @@
 <template>
   <div>
 
-<!--    <UserDetailsModal/>-->
-    <DeletePlayerModal ref="deleteUserModalRef" :selected-user = "selectedUser" />
+    <!--    <UserDetailsModal/>-->
+    <DeleteUserModal ref="deleteUserModalRef" :selected-user="selectedUser"/>
+
 
     <table class="table table-success table-hover rounded-table">
       <thead>
@@ -36,10 +37,11 @@
 <script>
 import DeleteUserModal from "@/components/modal/DeleteUserModal.vue";
 import UserDetailsModal from "@/components/modal/UserDetailsModal.vue";
+import DeletePlayerModal from "@/components/modal/DeletePlayerModal.vue";
 
 export default {
   name: "UsersTable",
-  components: {UserDetailsModal, DeleteUserModal},
+  components: {DeletePlayerModal, UserDetailsModal, DeleteUserModal},
 
   data() {
     return {
@@ -75,9 +77,10 @@ export default {
           })
     },
 
-    openDeleteUserModal(userId) {
+    openDeleteUserModal(userId, username) {
       this.selectedUser.userId = userId
-      this.$refs.deleteUserModalRef.$refs.modalRef.openModal() // ERROR !!
+      this.selectedUser.username = username
+      this.$refs.deleteUserModalRef.$refs.modalRef.openModal()
     },
 
   },

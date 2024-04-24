@@ -2,7 +2,7 @@
   <div class="container">
     <Modal ref="modalRef">
       <template #body>
-        Do you want to delete user nr: <b> {{ selectedUser.userId }} , {{ selectedUser.username }} </b> ?
+        Do you want to delete user <b> {{ selectedUser.username }} </b> ?
       </template>
       <template #buttons>
         <button @click="deleteUser" type="button" class="btn btn-success">Delete user</button>
@@ -41,13 +41,14 @@ export default {
     },
 
     sendDeleteUserRequest() {
-      this.$http.delete(`/user/${this.userId}`)
+      this.$http.delete(`/users/${this.userId}`)
           .then(() => {
             this.$refs.modalRef.closeModal()
           })
           .catch(error => {
             router.push({name: 'errorRoute'});
           })
+      // todo: UserTable list refresh
     }
   },
 
