@@ -36,7 +36,7 @@ export default {
           })
     },
     reset() {
-      this.selectedLeagueId = 0;
+      this.leagues = []
     },
 
     getSelectedCountryId(countryId) {

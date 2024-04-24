@@ -39,7 +39,7 @@ export default {
           })
     },
     reset() {
-      this.selectedClubId = 0;
+      this.clubs = []
     },
 
     getSelectedLeagueId(leagueId) {

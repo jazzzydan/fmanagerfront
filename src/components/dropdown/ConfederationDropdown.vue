@@ -36,7 +36,7 @@ export default {
           })
     },
     reset() {
-      this.selectedConfederationId = 0;
+      this.confederations = [];
     },
 
     emitSelectedConfederationId() {

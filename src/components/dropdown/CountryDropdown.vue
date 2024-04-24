@@ -37,7 +37,7 @@ export default {
           })
     },
     reset() {
-      this.selectedCountryId = 0;
+      this.countries = []
     },
 
     getSelectedConfederationId(confederationId) {

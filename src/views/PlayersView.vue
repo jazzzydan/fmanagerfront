@@ -77,12 +77,15 @@ export default {
     setConfederationId(selectedConfederationId) {
       this.playersRequest.confederationId = selectedConfederationId
       this.$refs.countryDropdownRef.getSelectedConfederationId(selectedConfederationId)
+      this.$refs.leagueDropdownRef.reset()
+      this.$refs.clubDropdownRef.reset()
       this.handleDropdownChange()
     },
 
     setCountryId(selectedCountryId) {
       this.playersRequest.countryId = selectedCountryId
       this.$refs.leagueDropdownRef.getSelectedCountryId(selectedCountryId)
+      this.$refs.clubDropdownRef.reset()
       this.handleDropdownChange()
     },
 
@@ -119,11 +122,7 @@ export default {
     },
 
     resetDropdowns() {
-      this.playersRequest.confederationId = 0;
-      this.playersRequest.countryId = 0;
-      this.playersRequest.leagueId = 0;
-      this.playersRequest.clubId = 0;
-      this.$refs.confederationDropdownRef.reset()
+      // this.$refs.confederationDropdownRef.reset()
       this.$refs.countryDropdownRef.reset()
       this.$refs.leagueDropdownRef.reset()
       this.$refs.clubDropdownRef.reset()
@@ -131,9 +130,11 @@ export default {
 
   },
 
-// mounted() {
-//   this.resetDropdowns()
-// }
+mounted() {
+  this.$nextTick(() => {
+    this.resetDropdowns();
+  });
+}
 
 }
 
