@@ -18,7 +18,7 @@
       <div class="row justify-content-center">
         <div class="col col-8">
 
-          <UsersTable/>
+          <UsersTable ref="userTableRef"/>
 
         </div>
       </div>

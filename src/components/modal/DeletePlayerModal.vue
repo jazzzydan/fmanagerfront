@@ -44,6 +44,7 @@ export default {
     sendDeletePlayerRequest() {
       this.$http.delete(`/player/${this.playerId}`)
           .then(() => {
+            this.$emit('update-players-table')
             this.$refs.modalRef.closeModal()
           })
           .catch(error => {

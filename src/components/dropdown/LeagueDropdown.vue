@@ -35,8 +35,9 @@ export default {
             router.push({name: 'errorRoute'})
           })
     },
-    reset() {
-      this.leagues = []
+
+    resetLeagueDropdown() {
+      this.selectedLeagueId = 0
     },
 
     getSelectedCountryId(countryId) {

@@ -38,8 +38,8 @@ export default {
             router.push({name: 'errorRoute'})
           })
     },
-    reset() {
-      this.clubs = []
+    resetClubDropdown() {
+      this.selectedLeagueId = 0
     },
 
     getSelectedLeagueId(leagueId) {

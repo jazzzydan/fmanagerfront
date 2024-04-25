@@ -35,8 +35,8 @@ export default {
             router.push({name: 'errorRoute'})
           })
     },
-    reset() {
-      this.confederations = [];
+    resetConfederationDropdown() {
+      this.selectedConfederationId = 0
     },
 
     emitSelectedConfederationId() {

@@ -1,9 +1,8 @@
 <template>
   <div>
 
-    <!--    <UserDetailsModal/>-->
-    <DeleteUserModal ref="deleteUserModalRef" :selected-user="selectedUser"/>
-
+<!--    <UserInfoInputModal/>-->
+    <DeleteUserModal ref="deleteUserModalRef" :selected-user="selectedUser" @event-update-users-table="sendGetUsersRequest"/>
 
     <table class="table table-success table-hover rounded-table">
       <thead>
@@ -38,10 +37,11 @@
 import DeleteUserModal from "@/components/modal/DeleteUserModal.vue";
 import UserDetailsModal from "@/components/modal/UserDetailsModal.vue";
 import DeletePlayerModal from "@/components/modal/DeletePlayerModal.vue";
+import UserInfoInputModal from "@/components/modal/UserInfoInputModal.vue";
 
 export default {
   name: "UsersTable",
-  components: {DeletePlayerModal, UserDetailsModal, DeleteUserModal},
+  components: {UserInfoInputModal, DeletePlayerModal, UserDetailsModal, DeleteUserModal},
 
   data() {
     return {

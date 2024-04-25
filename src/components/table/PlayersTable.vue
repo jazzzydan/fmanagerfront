@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <PlayerDetailsModal ref="playerDetailsModalRef"/>
-    <DeletePlayerModal ref="deletePlayerModalRef" :selected-player="selectedPlayer"/>
+    <DeletePlayerModal ref="deletePlayerModalRef" :selected-player="selectedPlayer" @update-players-table="sendGetPlayersRequest"/>
 
     <div class="row">
       <div class="col-10 mx-auto">

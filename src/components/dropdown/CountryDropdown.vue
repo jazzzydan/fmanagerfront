@@ -36,8 +36,8 @@ export default {
             router.push({name: 'errorRoute'})
           })
     },
-    reset() {
-      this.countries = []
+    resetCountryDropdown() {
+        this.selectedCountryId = 0
     },
 
     getSelectedConfederationId(confederationId) {

@@ -77,15 +77,12 @@ export default {
     setConfederationId(selectedConfederationId) {
       this.playersRequest.confederationId = selectedConfederationId
       this.$refs.countryDropdownRef.getSelectedConfederationId(selectedConfederationId)
-      this.$refs.leagueDropdownRef.reset()
-      this.$refs.clubDropdownRef.reset()
       this.handleDropdownChange()
     },
 
     setCountryId(selectedCountryId) {
       this.playersRequest.countryId = selectedCountryId
       this.$refs.leagueDropdownRef.getSelectedCountryId(selectedCountryId)
-      this.$refs.clubDropdownRef.reset()
       this.handleDropdownChange()
     },
 
@@ -117,23 +114,22 @@ export default {
       this.playersRequest.countryId = 0
       this.playersRequest.leagueId = 0
       this.playersRequest.clubId = 0
-
-      // todo: update dropdowns to comply with id = 0
+      this.resetDropdowns()
     },
 
     resetDropdowns() {
-      // this.$refs.confederationDropdownRef.reset()
-      this.$refs.countryDropdownRef.reset()
-      this.$refs.leagueDropdownRef.reset()
-      this.$refs.clubDropdownRef.reset()
+      this.$refs.confederationDropdownRef.resetConfederationDropdown()
+      this.$refs.countryDropdownRef.resetCountryDropdown()
+      this.$refs.leagueDropdownRef.resetLeagueDropdown()
+      // this.$refs.clubDropdownRef.resetClubDropdown()
     },
 
   },
 
 mounted() {
-  this.$nextTick(() => {
-    this.resetDropdowns();
-  });
+  // this.$nextTick(() => {
+  //   this.resetDropdowns();
+  // });
 }
 
 }

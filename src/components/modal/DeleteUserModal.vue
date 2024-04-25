@@ -43,12 +43,12 @@ export default {
     sendDeleteUserRequest() {
       this.$http.delete(`/users/${this.userId}`)
           .then(() => {
+            this.$emit('event-update-users-table')
             this.$refs.modalRef.closeModal()
           })
           .catch(error => {
             router.push({name: 'errorRoute'});
           })
-      // todo: UserTable list refresh
     }
   },
 
