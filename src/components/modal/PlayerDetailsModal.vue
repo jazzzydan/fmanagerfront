@@ -72,7 +72,7 @@
       <div v-if="playerId === 0">
         <button @click="addNewPlayer" type="submit" class="btn btn-success">Add player</button>
       </div>
-      <div v-else>
+      <div v-else isEdit>
         <button @click="editPlayer" type="submit" class="btn btn-success">Edit player</button>
       </div>
 
@@ -96,11 +96,13 @@ export default {
   name: "PlayerDetailsModal",
   components: {AlertSuccess, AlertDanger, ClubDropdown, Modal},
   data() {
+
     return {
       successMessage: '',
       errorMessage: '',
       playerId: 0,
       playerName: '',
+      isEdit: false,
 
       playerDetails: {
         playerName: '',
@@ -111,12 +113,14 @@ export default {
         weight: 0,
         nationality: '',
         bestFoot: ''
-      }
+      },
     }
   },
+
   methods: {
     openPlayerDetailsModal(playerId, playerName) {
       this.playerId = playerId;
+      this.playerName = playerName;
       this.$refs.modalRef.openModal();
     },
 
@@ -130,15 +134,6 @@ export default {
       }
     },
 
-    allFieldsWithCorrectInput() {
-      return this.playerDetails.playerName !== '' &&
-          this.playerDetails.gender !== '' &&
-          this.playerDetails.birthDate !== '' &&
-          this.playerDetails.height !== 0 &&
-          this.playerDetails.weight !== 0 &&
-          this.playerDetails.nationality !== '' &&
-          this.playerDetails.bestFoot !== ''
-    },
 
     sendPostPlayerRequest() {
       this.$http.post("/player", this.playerDetails)
@@ -149,11 +144,53 @@ export default {
           })
     },
 
+
+    editPlayer() {
+      if (this.allFieldsWithCorrectInput()) {
+        this.sendGetPlayerInfoRequest();
+        this.handlePutPlayerResponse();
+      } else {
+        this.errorMessage = ' täida kõik väljad'
+        setTimeout(this.resetMessage, 3000)
+      }
+    },
+
+    sendGetPlayerInfoRequest() {
+      this.$http.get(`/players/{playerId}${this.players}`)
+          .then(() => this.handlePutPlayerResponse)
+          .catch(error => {
+            this.errorResponse = error.response.data
+            this.handleError()
+          })
+    },
+
+    updateIsEditValue() {
+      this.isEdit = this.playerId !== ''
+    },
+
+    allFieldsWithCorrectInput() {
+      return this.playerDetails.playerName !== '' &&
+          this.playerDetails.gender !== '' &&
+          this.playerDetails.birthDate !== '' &&
+          this.playerDetails.height !== 0 &&
+          this.playerDetails.weight !== 0 &&
+          this.playerDetails.nationality !== '' &&
+          this.playerDetails.bestFoot !== ''
+    },
+
+
+    handlePutPlayerResponse() {
+      this.successMessage = 'Mängija "' + this.playerDetails.playerName + '" muudetud süsteemis'
+      setTimeout(this.$refs.modalRef.closeModal, 3000)
+      setTimeout(this.resetMessage, 3000)
+    },
+
     handlePostPlayerResponse() {
       this.successMessage = 'Uus mängija "' + this.playerDetails.playerName + '" lisatud süsteemi'
       setTimeout(this.$refs.modalRef.closeModal, 3000)
       setTimeout(this.resetMessage, 3000)
     },
+
 
     handleError() {
       this.handleSomethingWentWrongError()
@@ -176,9 +213,16 @@ export default {
     resetMessage() {
       this.successMessage = ''
       this.errorMessage = ''
-    },
+    }
+  },
+  mounted() {
+    this.updateIsEditValue()
+
 
   }
 }
+
+
+
 </script>
 
