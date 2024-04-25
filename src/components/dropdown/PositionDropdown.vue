@@ -15,6 +15,9 @@ import router from "@/router";
 
 export default {
   name: "PositionDropdown",
+  props: {
+    observationPositionId: Number
+  },
 
   data() {
     return {
@@ -35,12 +38,16 @@ export default {
     },
 
     emitSelectedPosition() {
-      // this.$emit('event-selected-position-change' ,this.selectedPositionId)
+      // this.$emit('event-selected-position-change' ,this.positionId)
     }
 
   },
   beforeMount() {
     this.sendGetPositionsRequest()
+    if (isNaN(this.observationPositionId)) {
+      this.positionId = 0
+    }
+    this.positionId = this.observationPositionId
   }
 }
 </script>

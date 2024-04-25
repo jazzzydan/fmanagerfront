@@ -32,8 +32,7 @@
       Add player button
     </div>
     <div class="row">
-      <!--      todo: Add Players table functionality-->
-      <PlayersTable ref="playersTableRef"/>
+         <PlayersTable ref="playersTableRef"/>
     </div>
   </div>
 </template>
@@ -127,9 +126,7 @@ export default {
   },
 
 mounted() {
-  // this.$nextTick(() => {
-  //   this.resetDropdowns();
-  // });
+
 }
 
 }

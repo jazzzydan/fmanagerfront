@@ -26,7 +26,7 @@
         <button @click="" class="btn btn-success custom-button" type="button">Next game</button>
       </div>
       <div class="col">
-        <button @click="openPlayerObservationModal" class="btn btn-success custom-button" type="button">New observation</button>
+        <button @click="" class="btn btn-success custom-button" type="button">Schedule</button>
       </div>
       <div class="col">
         <button @click="openStatisticsModal" class="btn btn-success custom-button" type="button">Statistics</button>

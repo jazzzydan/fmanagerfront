@@ -8,23 +8,17 @@
       <div class="modal-body">
         <div class="container-fluid">
           <div class="row mb-3 align-content-md-center">
-            Game dropdown: date, homeTeam, awayTeam
+            <AlertDanger :message="errorMessage" class="mb-3"/>
+            <AlertSuccess :message="successMessage" class="mb-3"/>
+            <GameDropdown :observationGameId="playerObservation.gameId" ref="gameDropdownRef"/>
           </div>
           <div class="row mb-3 align-content-md-center">
             <div class="col">
-
-<!--              todo: show observation date in date input field-->
-
               <input v-model="playerObservation.observationDate" type="date" class="form-control">
             </div>
             <div class="col">
-
-<!--              todo: show observation position in dropdown-->
-
-              <PositionDropdown/>
+              <PositionDropdown :observationPositionId="playerObservation.observationPositionId" ref="positionDropdownRef"/>
             </div>
-            <AlertDanger :message="errorMessage"/>
-            <AlertSuccess :message="successMessage"/>
           </div>
           <div class="row">
             <!-- First Group of Columns -->
@@ -174,10 +168,11 @@ import AlertSuccess from "@/components/alert/AlertSuccess.vue";
 import AlertDanger from "@/components/alert/AlertDanger.vue";
 import PositionDropdown from "@/components/dropdown/PositionDropdown.vue";
 import router from "@/router";
+import GameDropdown from "@/components/dropdown/GameDropdown.vue";
 
 export default {
   name: "PlayerObservationModal",
-  components: {PositionDropdown, AlertDanger, AlertSuccess, Modal},
+  components: {GameDropdown, PositionDropdown, AlertDanger, AlertSuccess, Modal},
   data() {
     return {
       // todo: playerId katte saada parent'ist
@@ -192,9 +187,10 @@ export default {
         gameAwayClubName: '',
         gameDate: '',
         userId: sessionStorage.getItem('userId'),
-        playerId: 0,
+        // todo: playerId parenti kaest katte saada
+        // playerId: this.$parent.
         observationDate: '',
-        observationPosition: '',
+        observationPositionId: 0,
         marking: null,
         setPieces: null,
         technique: null,
@@ -234,6 +230,23 @@ export default {
           })
     },
 
+    sendPutObservationRequest() {
+      this.$http.put(`/observation/${this.observationId}`, this.playerObservation
+      ).then(response => {
+        // sessionStorage.setItem('successMessage', 'Observation updated')
+        this.successMessage = 'Observation updated'
+        setTimeout(this.resetAlertMessages, 2100)
+        setTimeout(this.navigateToObservationsView, 2100)
+      }).catch(error => {
+        router.push({name: 'errorRoute'})
+      })
+    },
+
+    navigateToObservationsView() {
+      this.$refs.modalRef.closeModal()
+      router.push({name: 'observationsRoute'})
+    },
+
     validateInput(event) {
       const value = parseInt(event.target.value);
       if (isNaN(value) || value < 0) {
@@ -250,11 +263,15 @@ export default {
 
 
     addObservation() {
+      this.playerObservation.observationPositionId = this.$refs.positionDropdownRef.positionId
+      this.playerObservation.gameId = this.$refs.gameDropdownRef.gameId
 
     },
 
     editObservation() {
-
+      this.playerObservation.observationPositionId = this.$refs.positionDropdownRef.positionId
+      this.playerObservation.gameId = this.$refs.gameDropdownRef.gameId
+      this.sendPutObservationRequest();
     },
 
     resetAlertMessages() {
