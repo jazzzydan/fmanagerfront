@@ -72,7 +72,7 @@
       <div v-if="playerId === 0">
         <button @click="addNewPlayer" type="submit" class="btn btn-success">Add player</button>
       </div>
-      <div v-else isEdit>
+      <div v-else>
         <button @click="editPlayer" type="submit" class="btn btn-success">Edit player</button>
       </div>
 
