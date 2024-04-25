@@ -72,7 +72,7 @@
       <div v-if="playerId === 0">
         <button @click="addNewPlayer" type="submit" class="btn btn-success">Add player</button>
       </div>
-      <div v-else>
+      <div v-else isEdit>
         <button @click="editPlayer" type="submit" class="btn btn-success">Edit player</button>
       </div>
 
@@ -156,7 +156,7 @@ export default {
     },
 
     sendGetPlayerInfoRequest() {
-      this.$http.get(`/players/{playerId}${this.players}`)
+      this.$http.get(`/players/playersTable${this.players}`)
           .then(() => this.handlePutPlayerResponse)
           .catch(error => {
             this.errorResponse = error.response.data
