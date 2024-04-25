@@ -121,7 +121,7 @@ export default {
       this.$refs.confederationDropdownRef.resetConfederationDropdown()
       this.$refs.countryDropdownRef.resetCountryDropdown()
       this.$refs.leagueDropdownRef.resetLeagueDropdown()
-      // this.$refs.clubDropdownRef.resetClubDropdown()
+      this.$refs.clubDropdownRef.resetClubDropdown()
     },
 
   },
