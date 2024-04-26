@@ -175,7 +175,7 @@ export default {
   components: {GameDropdown, PositionDropdown, AlertDanger, AlertSuccess, Modal},
   data() {
     return {
-      // todo: playerId katte saada parent'ist
+      // todo: playerId katte saada parent'ist elleks et uut nangijat lisada
       playerId: 0,
       observationId: 0,
       errorMessage: '',
@@ -187,7 +187,7 @@ export default {
         gameAwayClubName: '',
         gameDate: '',
         userId: sessionStorage.getItem('userId'),
-        // todo: playerId parenti kaest katte saada
+        // todo: playerId parenti kaest katte saada selleks et uut nangijat lisada
         // playerId: this.$parent.
         observationDate: '',
         positionId: 0,
@@ -259,8 +259,6 @@ export default {
         setTimeout(this.resetAlertMessages, 2100)
       }
     },
-
-
 
     addObservation() {
       this.playerObservation.positionId = this.$refs.positionDropdownRef.positionId
