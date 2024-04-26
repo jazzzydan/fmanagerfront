@@ -99,6 +99,10 @@ export default {
   /* Other styles for your app container */
 }
 
+@font-face {
+  font-family: 'seguiblack';
+  src: url('assets/seguibl.ttf');
+}
 
 nav {
   padding: 30px;

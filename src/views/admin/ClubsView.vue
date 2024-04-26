@@ -1,12 +1,13 @@
 
 <template>
-  <h1>This is an CLUBS page</h1>
-  <h1>UNDER CONSTRUCTION</h1>
-  <font-awesome-icon :icon="['fas', 'user-secret']" />
+<UnderConstruction/>
 </template>
 
 <script>
+import UnderConstruction from "@/components/UnderConstruction.vue";
+
 export default {
-  name: "ClubsView"
+  name: "ClubsView",
+  components: {UnderConstruction}
 }
 </script>
