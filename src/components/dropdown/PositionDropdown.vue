@@ -22,7 +22,12 @@ export default {
   data() {
     return {
       positionId: 0,
-      positions: []
+      positions: [
+        {
+          positionId: 0,
+          positionCode: ''
+        }
+      ]
     }
   },
 

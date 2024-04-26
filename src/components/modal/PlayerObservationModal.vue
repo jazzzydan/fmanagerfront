@@ -17,7 +17,7 @@
               <input v-model="playerObservation.observationDate" type="date" class="form-control">
             </div>
             <div class="col">
-              <PositionDropdown :observationPositionId="playerObservation.observationPositionId" ref="positionDropdownRef"/>
+              <PositionDropdown :observationPositionId="playerObservation.positionId" ref="positionDropdownRef"/>
             </div>
           </div>
           <div class="row">
@@ -190,7 +190,7 @@ export default {
         // todo: playerId parenti kaest katte saada
         // playerId: this.$parent.
         observationDate: '',
-        observationPositionId: 0,
+        positionId: 0,
         marking: null,
         setPieces: null,
         technique: null,
@@ -263,13 +263,13 @@ export default {
 
 
     addObservation() {
-      this.playerObservation.observationPositionId = this.$refs.positionDropdownRef.positionId
+      this.playerObservation.positionId = this.$refs.positionDropdownRef.positionId
       this.playerObservation.gameId = this.$refs.gameDropdownRef.gameId
 
     },
 
     editObservation() {
-      this.playerObservation.observationPositionId = this.$refs.positionDropdownRef.positionId
+      this.playerObservation.positionId = this.$refs.positionDropdownRef.positionId
       this.playerObservation.gameId = this.$refs.gameDropdownRef.gameId
       this.sendPutObservationRequest();
     },
