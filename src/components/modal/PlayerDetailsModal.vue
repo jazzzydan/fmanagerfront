@@ -4,8 +4,6 @@
     <template #title>
       <span v-if="playerId === 0">Add player</span>
       <span v-else>Edit player: {{ this.playerName }}</span>
-      <!--      todo: if playerId is 0 -> Add player, else -> player Name-->
-
     </template>
     <template #body>
       <AlertDanger :message="errorMessage"/>
@@ -72,14 +70,9 @@
       <div v-if="playerId === 0">
         <button @click="addNewPlayer" type="submit" class="btn btn-success">Add player</button>
       </div>
-      <div v-else isEdit>
+      <div v-else>
         <button @click="editPlayer" type="submit" class="btn btn-success">Edit player</button>
       </div>
-
-
-      <!--v-if-->
-      <!--      todo: if playerId is 0 -> Add player: POST, else -> Update: PUT-->
-
     </template>
   </Modal>
 
@@ -94,6 +87,7 @@ import router from "@/router";
 
 export default {
   name: "PlayerDetailsModal",
+
   components: {AlertSuccess, AlertDanger, ClubDropdown, Modal},
   data() {
 
@@ -102,7 +96,7 @@ export default {
       errorMessage: '',
       playerId: 0,
       playerName: '',
-      isEdit: false,
+      // isEdit: false,
 
       playerDetails: {
         playerName: '',
@@ -121,7 +115,11 @@ export default {
     openPlayerDetailsModal(playerId, playerName) {
       this.playerId = playerId;
       this.playerName = playerName;
-      this.$refs.modalRef.openModal();
+      this.playerDetails.playerName = this.playerName
+      if(playerId !== 0) {
+        this.sendGetPlayerInfoRequest()
+      }
+      this.$refs.modalRef.openModal()
     },
 
     addNewPlayer() {
@@ -134,7 +132,6 @@ export default {
       }
     },
 
-
     sendPostPlayerRequest() {
       this.$http.post("/player", this.playerDetails)
           .then(() => this.handlePostPlayerResponse())
@@ -144,29 +141,30 @@ export default {
           })
     },
 
-
-    editPlayer() {
-      if (this.allFieldsWithCorrectInput()) {
-        this.sendGetPlayerInfoRequest();
-        this.handlePutPlayerResponse();
-      } else {
-        this.errorMessage = ' täida kõik väljad'
-        setTimeout(this.resetMessage, 3000)
-      }
-    },
-
     sendGetPlayerInfoRequest() {
-      this.$http.get(`/players/playersTable${this.players}`)
-          .then(() => this.handlePutPlayerResponse)
+      this.$http.get(`/player/${this.playerId}`)
+          .then(response => {
+            this.playerDetails = response.data
+          })
           .catch(error => {
             this.errorResponse = error.response.data
             this.handleError()
           })
     },
 
-    updateIsEditValue() {
-      this.isEdit = this.playerId !== ''
+    editPlayer() {
+        this.sendGetPlayerInfoRequest();
+        this.handlePutPlayerResponse();
+      if (this.allFieldsWithCorrectInput()) {
+      } else {
+        this.errorMessage = 'täida kõik väljad'
+        setTimeout(this.resetMessage, 2100)
+      }
     },
+
+    // updateIsEditValue() {
+    //   this.isEdit = this.playerId !== 0;
+    // },
 
     allFieldsWithCorrectInput() {
       return this.playerDetails.playerName !== '' &&
@@ -177,7 +175,6 @@ export default {
           this.playerDetails.nationality !== '' &&
           this.playerDetails.bestFoot !== ''
     },
-
 
     handlePutPlayerResponse() {
       this.successMessage = 'Mängija "' + this.playerDetails.playerName + '" muudetud süsteemis'
@@ -190,7 +187,6 @@ export default {
       setTimeout(this.$refs.modalRef.closeModal, 3000)
       setTimeout(this.resetMessage, 3000)
     },
-
 
     handleError() {
       this.handleSomethingWentWrongError()
@@ -216,13 +212,9 @@ export default {
     }
   },
   mounted() {
-    this.updateIsEditValue()
-
+    // this.updateIsEditValue()
 
   }
 }
-
-
-
 </script>
 

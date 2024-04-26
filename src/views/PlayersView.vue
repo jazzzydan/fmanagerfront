@@ -34,11 +34,7 @@
       </div>
     </div>
   </div>
-
-
   <div class="row">
-
-    <!--      todo: Add Players table functionality-->
     <PlayersTable ref="playersTableRef"/>
   </div>
   <div>

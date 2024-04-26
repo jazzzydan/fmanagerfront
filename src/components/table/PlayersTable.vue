@@ -114,7 +114,11 @@ export default {
     openPlayerDetailsModal(playerId, playerName) {
       this.$refs.playerDetailsModalRef.openPlayerDetailsModal(playerId, playerName)
 
+
+
     },
+
+
 
   },
 
