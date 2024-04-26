@@ -1,54 +1,54 @@
 <template>
   <div class="container">
-    <PlayerDetailsModal ref="playerDetailsModalRef"/>
+    <PlayerDetailsModal ref="playerDetailsModalRef" @update-players-table="sendGetPlayersRequest"/>
     <DeletePlayerModal ref="deletePlayerModalRef" :selected-player="selectedPlayer" @update-players-table="sendGetPlayersRequest"/>
 
     <div class="row">
       <div class="col-10 mx-auto">
 
-        <table class="table table-success table-hover rounded-table">
-          <thead>
-          <tr>
-            <th scope="col" style="text-align: left;">Players name</th>
-            <th scope="col">Nationality</th>
-            <th scope="col">Birth date</th>
-            <th scope="col">Height</th>
-            <th scope="col">Weight</th>
-            <th scope="col">Monitoring</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr v-for="player in players" :key="player.playerId">
-            <td style="text-align: left;">
-              <router-link to="/observations" @click="handlePlayerClick(player.playerId)">
-                {{ player.playerName }}
-              </router-link>
-            </td>
-            <td>{{ player.nationality }}</td>
-            <td>{{ player.birthDate }}</td>
-            <td>{{ player.height }}</td>
-            <td>{{ player.weight }}</td>
-            <td>
-              <div v-if="player.observationExists">
-                <font-awesome-icon :icon="['far', 'square-check']"/>
-              </div>
-              <div v-else>
-                <font-awesome-icon :icon="['far', 'square']"/>
-              </div>
-            </td>
-            <td>
-              <font-awesome-icon @click="openPlayerDetailsModal(player.playerId)" class="link-success cursor-pointer"
-                                 :icon="['far', 'pen-to-square']"/>
-            </td>
-            <td>
-              <font-awesome-icon @click="openDeletePlayerModal(player.playerId, player.playerName)" class="link-danger cursor-pointer"
-                                 :icon="['far', 'trash-can']"/>
-            </td>
-          </tr>
-          </tbody>
-        </table>
+          <table class="table table-success table-hover rounded-table">
+            <thead>
+            <tr>
+              <th scope="col" style="text-align: left;">Players name</th>
+              <th scope="col">Nationality</th>
+              <th scope="col">Birth date</th>
+              <th scope="col">Height</th>
+              <th scope="col">Weight</th>
+              <th scope="col">Monitoring</th>
+              <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="player in players" :key="player.playerId">
+              <td style="text-align: left;">
+                <router-link to="/observations" @click="handlePlayerClick(player.playerId)">
+                  {{ player.playerName }}
+                </router-link>
+              </td>
+              <td>{{ player.nationality }}</td>
+              <td>{{ player.birthDate }}</td>
+              <td>{{ player.height }}</td>
+              <td>{{ player.weight }}</td>
+              <td>
+                <div v-if="player.observationExists">
+                  <font-awesome-icon :icon="['far', 'square-check']"/>
+                </div>
+                <div v-else>
+                  <font-awesome-icon :icon="['far', 'square']"/>
+                </div>
+              </td>
+              <td>
+                <font-awesome-icon @click="openPlayerDetailsModal(player.playerId, player.playerName)" class="link-success cursor-pointer"
+                                   :icon="['far', 'pen-to-square']"/>
+              </td>
+              <td>
+                <font-awesome-icon @click="openDeletePlayerModal(player.playerId, player.playerName)" class="link-danger cursor-pointer"
+                                   :icon="['far', 'trash-can']"/>
+              </td>
+            </tr>
+            </tbody>
+          </table>
 
       </div>
     </div>
@@ -102,6 +102,7 @@ export default {
       this.$http.post("/players", this.playersRequest)
           .then(response => {
             this.players = response.data
+            this.players.sort((a, b) => (a.playerName > b.playerName ? 1 : -1))
           }).catch(error => {
         router.push({name: 'errorRoute'})
       })
@@ -115,12 +116,13 @@ export default {
     handlePlayerClick(clickedPlayerId) {
       // URL + query/request parameter example
       // router.push({name: 'locationRoute', query: {locationId: locationId}})
+
       // URL + path variable
       router.push({name: 'observationsRoute', query: {playerId: clickedPlayerId}})
     },
 
-    openPlayerDetailsModal(playerId) {
-      this.$refs.playerDetailsModalRef.$refs.modalRef.openModal()
+    openPlayerDetailsModal(playerId, playerName) {
+      this.$refs.playerDetailsModalRef.openPlayerDetailsModal(playerId, playerName)
 
     },
 

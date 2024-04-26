@@ -19,17 +19,18 @@
                       @event-selected-club-change="setClubId"/>
       </div>
       <div class="col">
-        <PlayerSearchInput @event-player-search-name-enter="searchPlayer"/>
+        <PlayerSearchInput @event-player-search-name-enter = "searchPlayer"/>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
   <div class="row">
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"></div>
     <div class="col">
-      Add player button
+      <div class="d-grid col-5 mx-auto m-3">
+        <button @click="openPlayerDetailsModal(this.playerId, '')" class="btn btn-primary" type="button">
+          Add Player
+        </button>
+        <PlayerDetailsModal ref="playerDetailsModalRef"/>
+      </div>
     </div>
     <div class="row">
          <PlayersTable ref="playersTableRef"/>
@@ -52,13 +53,20 @@ export default {
   name: "PlayersView",
   components: {
     DeletePlayerModal,
-    PlayerDetailsModal, LeagueDropdown, ClubDropdown, CountryDropdown, ConfederationDropdown, PlayersTable, PlayerSearchInput},
+    PlayerDetailsModal,
+    LeagueDropdown,
+    ClubDropdown,
+    CountryDropdown,
+    ConfederationDropdown,
+    PlayersTable,
+    PlayerSearchInput
+  },
 
   data() {
     return {
       errorMessage: '',
       successMessage: '',
-
+      playerId: 0,
       selectedPlayerId: 0,
 
       playersRequest: {
@@ -69,7 +77,6 @@ export default {
         playerName: '',
         playerId: '',
       }
-
     }
   },
   methods: {
@@ -123,12 +130,19 @@ export default {
       this.$refs.clubDropdownRef.resetClubDropdown()
     },
 
+    openPlayerDetailsModal(playerId, playerName) {
+      // if (playerId !== 0) {
+      //   // Edit mode: Pass player ID to modal to load player data for editing
+      //   this.$refs.playerDetailsModalRef.openPlayerDetailsModal(playerId);
+      // } else {
+      //   // Add mode: Open modal for adding a new player
+      this.$refs.playerDetailsModalRef.openPlayerDetailsModal(playerId, playerName);
+    }
   },
 
 mounted() {
 
-}
-
+  }
 }
 
 </script>

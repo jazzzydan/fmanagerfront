@@ -23,6 +23,7 @@
             <!-- button -->
           </slot>
           <button type="button" class="btn btn-danger" @click="closeModal">Cancel</button>
+
         </div>
       </div>
     </div>
