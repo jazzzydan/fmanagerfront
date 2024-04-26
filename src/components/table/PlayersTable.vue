@@ -93,6 +93,7 @@ export default {
       this.$http.post("/players", this.playersRequest)
           .then(response => {
             this.players = response.data
+            this.players.sort((a, b) => (a.playerName > b.playerName ? 1 : -1))
           }).catch(error => {
         router.push({name: 'errorRoute'})
       })
@@ -114,11 +115,7 @@ export default {
     openPlayerDetailsModal(playerId, playerName) {
       this.$refs.playerDetailsModalRef.openPlayerDetailsModal(playerId, playerName)
 
-
-
     },
-
-
 
   },
 

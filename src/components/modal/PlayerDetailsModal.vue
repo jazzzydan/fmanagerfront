@@ -174,10 +174,6 @@ export default {
       }
     },
 
-    // updateIsEditValue() {
-    //   this.isEdit = this.playerId !== 0;
-    // },
-
     allFieldsWithCorrectInput() {
       return this.playerDetails.playerName !== '' &&
           this.playerDetails.gender !== '' &&
@@ -192,6 +188,7 @@ export default {
       this.successMessage = 'Mängija "' + this.playerDetails.playerName + '" muudetud süsteemis'
       setTimeout(this.$refs.modalRef.closeModal, 2100)
       setTimeout(this.resetMessage, 2100)
+      this.$emit('update-players-table')
     },
 
     handlePostPlayerResponse() {
@@ -223,10 +220,6 @@ export default {
       this.errorMessage = ''
     }
   },
-  mounted() {
-    // this.updateIsEditValue()
-
-  }
 }
 </script>
 
