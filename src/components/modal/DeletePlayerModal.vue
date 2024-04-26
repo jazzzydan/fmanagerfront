@@ -16,7 +16,6 @@
 
 import router from "@/router";
 import Modal from "@/components/modal/Modal.vue";
-import playersTable from "@/components/table/PlayersTable.vue";
 
 
 export default {
