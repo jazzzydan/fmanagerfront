@@ -18,7 +18,7 @@
         <div class="row mb-3">
           <div class="col align-content-md-center">Club:</div>
           <div class="col">
-            <ClubDropdown v-model="playerDetails.clubId"/>
+            <ClubDropdown ref="clubDropdownRef" v-model="playerDetails.clubId"/>
           </div>
         </div>
         <div class="row mb-3">
@@ -145,6 +145,7 @@ export default {
       this.$http.get(`/player/${this.playerId}`)
           .then(response => {
             this.playerDetails = response.data
+            this.$refs.clubDropdownRef.selectedClubId = this.playerDetails.clubId
           })
           .catch(error => {
             this.errorResponse = error.response.data
@@ -152,10 +153,21 @@ export default {
           })
     },
 
+    sendPutPlayerRequest() {
+      this.$http.put(`/player/${this.playerId}`, this.playerDetails
+      ).then(response => {
+        this.handlePutPlayerResponse()
+      }).catch(error => {
+        this.errorResponse = error.response.data
+        this.handleError()
+      })
+    },
+
+
     editPlayer() {
-        this.sendGetPlayerInfoRequest();
-        this.handlePutPlayerResponse();
       if (this.allFieldsWithCorrectInput()) {
+        this.sendPutPlayerRequest()
+        this.handlePutPlayerResponse()
       } else {
         this.errorMessage = 'täida kõik väljad'
         setTimeout(this.resetMessage, 2100)
@@ -178,8 +190,8 @@ export default {
 
     handlePutPlayerResponse() {
       this.successMessage = 'Mängija "' + this.playerDetails.playerName + '" muudetud süsteemis'
-      setTimeout(this.$refs.modalRef.closeModal, 3000)
-      setTimeout(this.resetMessage, 3000)
+      setTimeout(this.$refs.modalRef.closeModal, 2100)
+      setTimeout(this.resetMessage, 2100)
     },
 
     handlePostPlayerResponse() {
