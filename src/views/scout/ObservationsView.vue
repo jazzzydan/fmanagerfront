@@ -8,10 +8,10 @@
       <AlertSuccess :message="successMessage"/>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col mb-3">
         <PlayerDropdown ref="playerDropdownRef" @event-selected-player-change="updatePlayerId"/>
       </div>
-      <div class="col">
+      <div class="col mb-3">
 
           <select class="form-select">
             <option selected :value="0">Year</option>
@@ -20,7 +20,7 @@
           </select>
 
       </div>
-      <div class="col">
+      <div class="col mb-3">
         <button @click="openPlayerObservationModal" class="btn btn-primary custom-button" type="button">Add new observation</button>
       </div>
     </div>
@@ -28,13 +28,13 @@
       <ObservationsTable ref="observationsTableRef"/>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col mb-3">
         <button @click="" class="btn btn-success custom-button" type="button">Next game</button>
       </div>
-      <div class="col">
+      <div class="col mb-3">
         <button @click="" class="btn btn-success custom-button" type="button">Schedule</button>
       </div>
-      <div class="col">
+      <div class="col mb-3">
         <button @click="openStatisticsModal" class="btn btn-success custom-button" type="button">Statistics</button>
       </div>
     </div>
