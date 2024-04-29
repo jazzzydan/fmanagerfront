@@ -1,5 +1,6 @@
 <template>
-  <div class="container rounded-5">
+  <div class="container">
+    <div class="background-wrapper rounded-3">
     <!-- Create, Edit, or Delete Players -->
     <div class="row" style="margin-top: 100px; margin-bottom: 200px;">
       <div class="col col-3 text-start">
@@ -29,6 +30,7 @@
         <img src="../../assets/aboutObservation.png" alt="Detailed Observations" style="width: 94%;"/>
       </div>
     </div>
+    </div>
   </div>
 </template>
 
@@ -40,10 +42,10 @@ export default {
 
 <style>
 
-.container {
-  max-width: 80%; /* Adjusted width */
+.background-wrapper {
+  max-width: 90%; /* Adjusted width */
   margin: 0 auto;
-  background-color: rgba(209, 230, 220, 0.7); /* 80% transparent green background */
+  background-color: rgba(209, 230, 220, 0.7); /* 70% transparent green background */
 }
 
 .row {

@@ -12,7 +12,13 @@
         <PlayerDropdown ref="playerDropdownRef" @event-selected-player-change="updatePlayerId"/>
       </div>
       <div class="col">
-        <PlayerSearchInput @event-player-search-name-enter="searchPlayer"/>
+
+          <select class="form-select">
+            <option selected :value="0">Year</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+          </select>
+
       </div>
       <div class="col">
         <button @click="openPlayerObservationModal" class="btn btn-primary custom-button" type="button">Add new observation</button>
